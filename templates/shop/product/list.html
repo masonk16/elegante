@@ -17,7 +17,7 @@
             <!-- ##### Single Widget ##### -->
             <div class="widget catagory mb-50">
                 <!-- Widget Title -->
-                <h6 class="widget-title mb-30">Catagories</h6>
+                <h6 class="widget-title mb-30">Categories</h6>
 
                 <!--  Catagories  -->
                 <div class="catagories-menu">
@@ -165,7 +165,7 @@
                             <!-- Product Image -->
                             <div class="product-img">
                                 <a href="{{ product.get_absolute_url }}">
-                                    <img src="{% if product.image %}{{ product.image.url }}{%else %}{% static "img/product-img/product2.jpg" %}{% endif %}">
+                                    <img href="" src="{% if product.image %}{{ product.image.url }}{%else %}{% static "img/product-img/product2.jpg" %}{% endif %}">
                                 </a>
                                 <!-- Hover Thumb -->
                                 <img class="hover-img" src="{% static "img/product-img/product2.jpg" %}" alt="">
