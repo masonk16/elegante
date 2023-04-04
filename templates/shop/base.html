@@ -84,7 +84,18 @@
             </div>
             <!-- Cart Menu -->
             <div class="cart-fav-search mb-100">
-                <a href="../../cart.html" class="cart-nav"><img src="{% static 'img/core-img/cart.png' %}" alt=""> Cart <span>(0)</span></a>
+                {% with total_items=cart|length %}
+                {% if total_items > 0 %}
+                <a href="{% url 'cart:cart_detail' %}" class="cart-nav"><img src="{% static 'img/core-img/cart.png' %}" alt="">
+                    Cart
+                    <span>
+                        ({{ total_items }})
+                    </span>
+                    {% else %}
+                    <span>(0)</span>
+                </a>
+                {% endif %}
+                {% endwith %}
                 <a href="#" class="fav-nav"><img src="{% static 'img/core-img/favorites.png' %}" alt=""> Favourite</a>
                 <a href="#" class="search-nav"><img src="{% static 'img/core-img/search.png' %}" alt=""> Search</a>
             </div>
