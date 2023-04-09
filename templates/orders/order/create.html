@@ -1,4 +1,5 @@
 {% extends "shop/base.html" %}
+{% load widget_tweaks %}
 
 {% block title %}
 Checkout
@@ -17,7 +18,12 @@ Checkout
 
                     <form action="#" method="post">
                         {% csrf_token %}
-                        {{ form.as_p }}
+                        {{ form.first_name|add_class:"form-control col-md-6 mb-3" }}
+                        {{ form.last_name|add_class:"form-control col-md-6 mb-3" }}
+                        {{ form.email|add_class:"form-control col-12 mb-3" }}
+                        {{ form.address|add_class:"form-control col-12 mb-3" }}
+                        {{ form.postal_code|add_class:"form-control col-md-4 mb-3" }}
+                        {{ form.city|add_class:"form-control col-md-8 mb-3" }}
                         <p>
                             <input type="submit" value="Place order">
                         </p>
