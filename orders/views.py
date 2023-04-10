@@ -8,7 +8,6 @@ from .tasks import order_created
 
 def order_create(request):
     cart = Cart(request)
-    print(cart.cart.items())
     if request.method == 'POST':
         form = OrderCreateForm(request.POST)
         if form.is_valid():
