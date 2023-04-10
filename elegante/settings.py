@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     "cart.apps.CartConfig",
     "orders.apps.OrdersConfig",
     "payment.apps.PaymentConfig",
-    "widget_tweaks"
+    "widget_tweaks",
 ]
 
 MIDDLEWARE = [
@@ -63,8 +63,7 @@ ROOT_URLCONF = "elegante.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / 'templates']
-        ,
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -133,26 +132,26 @@ STATICFILES_DIRS = [
 ]
 
 # Media settings
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-CART_SESSION_ID = 'cart'
+CART_SESSION_ID = "cart"
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
 # Braintree settings
-BRAINTREE_MERCHANT_ID = os.getenv('BRAINTREE_MERCHANT_ID')
-BRAINTREE_PUBLIC_KEY = os.getenv('BRAINTREE_PUBLIC_KEY')
-BRAINTREE_PRIVATE_KEY = os.getenv('BRAINTREE_PRIVATE_KEY')
+BRAINTREE_MERCHANT_ID = os.getenv("BRAINTREE_MERCHANT_ID")
+BRAINTREE_PUBLIC_KEY = os.getenv("BRAINTREE_PUBLIC_KEY")
+BRAINTREE_PRIVATE_KEY = os.getenv("BRAINTREE_PRIVATE_KEY")
 
 BRAINTREE_CONF = braintree.Configuration(
     braintree.Environment.Sandbox,
     BRAINTREE_MERCHANT_ID,
     BRAINTREE_PUBLIC_KEY,
-    BRAINTREE_PRIVATE_KEY
+    BRAINTREE_PRIVATE_KEY,
 )
