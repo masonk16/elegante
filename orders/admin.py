@@ -7,11 +7,6 @@ from django.utils.safestring import mark_safe
 from .models import Order, OrderItem
 
 
-class OrderItemInline(admin.TabularInline):
-    model = OrderItem
-    raw_id_fields = ["product"]
-
-
 def export_to_csv(modeladmin, request, queryset):
     opts = modeladmin.model._meta
     content_disposition = f"attachment; filename={opts.verbose_name}.csv"
@@ -38,6 +33,11 @@ def export_to_csv(modeladmin, request, queryset):
 
 
 export_to_csv.short_description = "Export to CSV"
+
+
+class OrderItemInline(admin.TabularInline):
+    model = OrderItem
+    raw_id_fields = ["product"]
 
 
 def order_detail(obj):
@@ -67,6 +67,7 @@ class OrderAdmin(admin.ModelAdmin):
         "created",
         "updated",
         order_detail,
+        order_pdf,
     ]
     list_filter = ["paid", "created", "updated"]
     inlines = [OrderItemInline]
