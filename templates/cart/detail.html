@@ -59,15 +59,36 @@
                             {% endfor %}
                             </tbody>
                         </table>
+                        <p>Apply a coupon:</p>
+                        <form action="{% url "coupons:apply" %}" method="post">
+                            {% csrf_token %}
+                            {{ coupon_apply_form }}
+                            <input type="submit" value="Apply">
+                        </form>
                     </div>
                 </div>
                 <div class="col-12 col-lg-4">
                     <div class="cart-summary">
                         <h5>Cart Total</h5>
                         <ul class="summary-table">
-                            <li><span>subtotal:</span> <span>${{ cart.get_total_price }}</span></li>
-                            <li><span>delivery:</span> <span>Free</span></li>
-                            <li><span>total:</span> <span>${{ cart.get_total_price }}</span></li>
+                            {% if cart.coupon %}
+                                <li>
+                                    <span>subtotal:</span>
+                                    <span>${{ cart.get_total_price|floatformat:2 }}</span>
+                                </li>
+                                <li>
+                                    <span>"{{ cart.coupon.code }}"</span>
+                                    ({{ cart.coupon.discount }}% off)
+                                </li>
+                                <li>
+                                    <span>  </span>
+                                    <span>- ${{ cart.get_discount|floatformat:2 }}</span>
+                                </li>
+                            {% endif %}
+                            <li>
+                                <span>total:</span>
+                                <span>${{ cart.get_total_price_after_discount|floatformat:2 }}</span>
+                            </li>
                         </ul>
                         <div class="cart-btn mt-100">
                             <a href="{% url "orders:order_create" %}" class="btn amado-btn w-100">Checkout</a>
