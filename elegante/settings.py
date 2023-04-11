@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "orders.apps.OrdersConfig",
     "payment.apps.PaymentConfig",
     "widget_tweaks",
+    "coupons.apps.CouponsConfig",
 ]
 
 MIDDLEWARE = [
