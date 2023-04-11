@@ -35,10 +35,27 @@ Checkout
                     <h5>Cart Total</h5>
                     <ul class="summary-table">
                         {% for item in cart %}
-                            <li>{{ item.quantity }} x<span>{{ item.product.name }}</span> <span>${{ item.total_price }}</span></li>
+                            <li>
+                                {{ item.quantity }} x
+                                <span>{{ item.product.name }}</span>
+                                <span>${{ item.total_price|floatformat:2 }}</span>
+                            </li>
                         {% endfor %}
-                        <li><span>delivery:</span> <span>Free</span></li>
-                        <li><span>Total:</span> <span>${{ cart.get_total_price }}</span></li>
+                        {% if cart.coupon %}
+                            <li>
+
+                                "{{ cart.coupon.code }}" ({{ cart.coupon.discount }}% off)
+                                <span>
+                                    - ${{ cart.get_discount|floatformat:2 }}
+                                </span>
+                            </li>
+                        {% endif %}
+                        <li>
+                            <span>Total:</span>
+                            <span>
+                                ${{ cart.get_total_price_after_discount|floatformat:2 }}
+                            </span>
+                        </li>
                     </ul>
 
                     <div class="payment-method">
