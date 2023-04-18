@@ -1,0 +1,420 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    {{ product.name }}
+{% endblock %}
+
+{% block content %}
+    <!-- breadcrumbs -->
+    <section class="breadcrumbs bg-light">
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item">
+                                <a href="{% url 'shop:home' %}">
+                                    {% trans 'Home' %}
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                <a href="{{ product.category.get_absolute_url }}">
+                                    {{ product.category.name }}
+                                </a>
+                            </li>
+                            <li class="breadcrumb-item active" aria-current="page">
+                                <a href="{{ product.get_absolute_url }}">
+                                    {{ product.name }}
+                                </a>
+                            </li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- product -->
+    <section class="hero bg-light pt-5">
+        <div class="container">
+            <div class="row gutter-2 gutter-md-4 justify-content-between">
+
+                <div class="col-lg-7">
+                    <div class="row gutter-1 justify-content-between">
+                        <div class="col-lg-10 order-lg-2">
+                            <div class="owl-carousel gallery" data-slider-id="1" data-thumbs="true" data-nav="true">
+                                {% for image in product.product_images %}
+                                    <figure class="equal">
+                                        <a class="image" href="{{ image.url }}"
+                                        style="background-image: url({{ image.url }});">
+                                        </a>
+                                    </figure>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        <div class="col-lg-2 text-center text-lg-left order-lg-1">
+                            <div class="owl-thumbs" data-slider-id="1">
+                                {% for image in product.product_images %}
+                                    <span class="owl-thumb-item"><img src="{{ image.url }}" alt="{{ product.name }}"></span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-5 mb-5 mb-lg-0">
+                    <div class="row">
+                        <div class="col-12">
+                            <span class="item-brand">{{ product.brand }}</span>
+                            <h1 class="item-title">{{ product.name }}</h1>
+                            <span class="item-price">${{ product.price }}</span>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <p>{{ product.description }}</p>
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label>Color</label>
+                                <div class="btn-group-toggle btn-group-square btn-group-colors" data-toggle="buttons">
+                                    <label class="btn active text-red">
+                                        <input type="radio" name="options" id="option1-2" checked>
+                                    </label>
+                                    <label class="btn text-blue">
+                                        <input type="radio" name="options" id="option2-2">
+                                    </label>
+                                    <label class="btn text-yellow">
+                                        <input type="radio" name="options" id="option3-2">
+                                    </label>
+                                    <label class="btn text-green">
+                                        <input type="radio" name="options" id="option4-2">
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <form class="row gutter-1 mb-6" action="{% url "cart:cart_add" product.id %}" method="post">
+                            {% csrf_token %}
+                            <div class="form-group col-md-2">
+                                {{ cart_product_form.quantity|add_class:"form-control" }}
+                            </div>
+                            <button type="submit" class="btn btn-block btn-lg btn-primary" name="addtocart">{% trans 'Add to cart' %}</button>
+                        </form>
+                        </div>
+                        <div class="col-12 mt-1">
+                            <ul class="nav nav-actions">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Add to wishlist</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Share this product</a>
+                                    <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item" href="#">Facebook</a>
+                                    </li>
+                                    <li>
+                                        <a class="dropdown-item" href="#">Twitter</a>
+                                    </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- info -->
+    <section class="separator-bottom">
+        <div class="container">
+            <div class="row gutter-2 gutter-lg-4">
+                <div class="col-md-4 col-lg-2">
+                    <div class="rate">
+                        <span>4.9</span>
+                        <a data-toggle="modal" data-target="#reviews" class="action eyebrow text-primary underline">View Reviews</a>
+                    </div>
+                </div>
+                <div class="col-md-8 col-lg-6">
+                    <p>{{ product.specification }}</p>
+                </div>
+                <div class="col-lg-4">
+                    <ul class="list-group list-group-line">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            SKU
+                            <span class="text-dark">{{ product.sku }}</span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Category
+                            <span class="text-dark">
+                                <a href="" class="underline text-dark">
+                                    {{ product.category.name }}
+                                </a>
+                            </span>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            Tags
+                            <span class="text-dark"><a href="" class="underline text-dark">backpack</a>, <a href="" class="underline text-dark">minimal</a></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- related products -->
+    <section class="no-overflow">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 mb-3">
+            <ul class="nav nav-tabs lavalamp" id="myTab" role="tablist">
+              <li class="nav-item">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Related Products</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Bought With This</a>
+              </li>
+            </ul>
+          </div>
+          <div class="col">
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                <div class="owl-carousel owl-carousel-arrows visible" data-items="[4,4,2,1]" data-margin="10" data-loop="true" data-dots="true" data-nav="true">
+                  <div class="product">
+                    <figure class="product-image">
+                      <a href="#!">
+                        <img src="assets/images/demo/product-1.jpg" alt="Image">
+                        <img src="assets/images/demo/product-1-2.jpg" alt="Image">
+                      </a>
+                    </figure>
+                    <div class="product-meta">
+                      <h3 class="product-title"><a href="#!">Fawn Wool / Natural Mammoth Chair </a></h3>
+                      <div class="product-price">
+                        <span>$2,268</span>
+                        <span class="product-action">
+                          <a href="#!">Add to cart</a>
+                        </span>
+                      </div>
+                      <a href="#!" class="product-like"></a>
+                    </div>
+                  </div>
+                  <div class="product">
+                    <figure class="product-image">
+                      <a href="#!">
+                        <img src="assets/images/demo/product-3.jpg" alt="Image">
+                        <img src="assets/images/demo/product-3-2.jpg" alt="Image">
+                      </a>
+                    </figure>
+                    <div class="product-meta">
+                      <h3 class="product-title"><a href="#!">Black IC Pendant Light</a></h3>
+                      <div class="product-price">
+                        <span>$410</span>
+                        <span class="product-action">
+                          <a href="#!">Add to cart</a>
+                        </span>
+                      </div>
+                      <a href="#!" class="product-like"></a>
+                    </div>
+                  </div>
+                  <div class="product">
+                    <figure class="product-image">
+                      <a href="#!">
+                        <img src="assets/images/demo/product-4.jpg" alt="Image">
+                        <img src="assets/images/demo/product-4-2.jpg" alt="Image">
+                      </a>
+                    </figure>
+                    <div class="product-meta">
+                      <h3 class="product-title"><a href="#!">Red Analog Magazine Rack</a></h3>
+                      <div class="product-price">
+                        <span>$120</span>
+                        <span class="product-action">
+                          <a href="#!">Add to cart</a>
+                        </span>
+                      </div>
+                      <a href="#!" class="product-like"></a>
+                    </div>
+                  </div>
+                  <div class="product">
+                    <figure class="product-image">
+                      <a href="#!">
+                        <img src="assets/images/demo/product-5.jpg" alt="Image">
+                        <img src="assets/images/demo/product-5-2.jpg" alt="Image">
+                      </a>
+                    </figure>
+                    <div class="product-meta">
+                      <h3 class="product-title"><a href="#!">Black Piani Table Lamp</a></h3>
+                      <div class="product-price">
+                        <span>$290</span>
+                        <span class="product-action">
+                          <a href="#!">Add to cart</a>
+                        </span>
+                      </div>
+                      <a href="#!" class="product-like"></a>
+                    </div>
+                  </div>
+                  <div class="product">
+                    <figure class="product-image">
+                      <a href="#!">
+                        <img src="assets/images/demo/product-6.jpg" alt="Image">
+                        <img src="assets/images/demo/product-6-2.jpg" alt="Image">
+                      </a>
+                    </figure>
+                    <div class="product-meta">
+                      <h3 class="product-title"><a href="#!">Grey Pendant Bell Lamp</a></h3>
+                      <div class="product-price">
+                        <span>$258</span>
+                        <span class="product-action">
+                          <a href="#!">Add to cart</a>
+                        </span>
+                      </div>
+                      <a href="#!" class="product-like"></a>
+                    </div>
+                  </div>
+                  <div class="product">
+                    <figure class="product-image">
+                      <a href="#!">
+                        <img src="assets/images/demo/product-7.jpg" alt="Image">
+                        <img src="assets/images/demo/product-7-2.jpg" alt="Image">
+                      </a>
+                    </figure>
+                    <div class="product-meta">
+                      <h3 class="product-title"><a href="#!">Garnet Must Sofa</a></h3>
+                      <div class="product-price">
+                        <span>$4,668</span>
+                        <span class="product-action">
+                          <a href="#!">Add to cart</a>
+                        </span>
+                      </div>
+                      <a href="#!" class="product-like"></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="owl-carousel visible" data-items="[4,4,2,1]" data-margin="10" data-loop="true" data-dots="true">
+                  <div class="product">
+                    <figure class="product-image">
+                      <a href="#!">
+                        <img src="assets/images/demo/product-6.jpg" alt="Image">
+                        <img src="assets/images/demo/product-6-2.jpg" alt="Image">
+                      </a>
+                    </figure>
+                    <div class="product-meta">
+                      <h3 class="product-title"><a href="#!">Grey Pendant Bell Lamp</a></h3>
+                      <div class="product-price">
+                        <span>$258</span>
+                        <span class="product-action">
+                          <a href="#!">Add to cart</a>
+                        </span>
+                      </div>
+                      <a href="#!" class="product-like"></a>
+                    </div>
+                  </div>
+                  <div class="product">
+                    <figure class="product-image">
+                      <a href="#!">
+                        <img src="assets/images/demo/product-1.jpg" alt="Image">
+                        <img src="assets/images/demo/product-1-2.jpg" alt="Image">
+                      </a>
+                    </figure>
+                    <div class="product-meta">
+                      <h3 class="product-title"><a href="#!">Fawn Wool / Natural Mammoth Chair </a></h3>
+                      <div class="product-price">
+                        <span>$2,268</span>
+                        <span class="product-action">
+                          <a href="#!">Add to cart</a>
+                        </span>
+                      </div>
+                      <a href="#!" class="product-like"></a>
+                    </div>
+                  </div>
+                  <div class="product">
+                    <figure class="product-image">
+                      <a href="#!">
+                        <img src="assets/images/demo/product-7.jpg" alt="Image">
+                        <img src="assets/images/demo/product-7-2.jpg" alt="Image">
+                      </a>
+                    </figure>
+                    <div class="product-meta">
+                      <h3 class="product-title"><a href="#!">Garnet Must Sofa</a></h3>
+                      <div class="product-price">
+                        <span>$4,668</span>
+                        <span class="product-action">
+                          <a href="#!">Add to cart</a>
+                        </span>
+                      </div>
+                      <a href="#!" class="product-like"></a>
+                    </div>
+                  </div>
+                  <div class="product">
+                    <figure class="product-image">
+                      <a href="#!">
+                        <img src="assets/images/demo/product-3.jpg" alt="Image">
+                        <img src="assets/images/demo/product-3-2.jpg" alt="Image">
+                      </a>
+                    </figure>
+                    <div class="product-meta">
+                      <h3 class="product-title"><a href="#!">Black IC Pendant Light</a></h3>
+                      <div class="product-price">
+                        <span>$410</span>
+                        <span class="product-action">
+                          <a href="#!">Add to cart</a>
+                        </span>
+                      </div>
+                      <a href="#!" class="product-like"></a>
+                    </div>
+                  </div>
+                  <div class="product">
+                    <figure class="product-image">
+                      <a href="#!">
+                        <img src="assets/images/demo/product-5.jpg" alt="Image">
+                        <img src="assets/images/demo/product-5-2.jpg" alt="Image">
+                      </a>
+                    </figure>
+                    <div class="product-meta">
+                      <h3 class="product-title"><a href="#!">Black Piani Table Lamp</a></h3>
+                      <div class="product-price">
+                        <span>$290</span>
+                        <span class="product-action">
+                          <a href="#!">Add to cart</a>
+                        </span>
+                      </div>
+                      <a href="#!" class="product-like"></a>
+                    </div>
+                  </div>
+                  <div class="product">
+                    <figure class="product-image">
+                      <a href="#!">
+                        <img src="assets/images/demo/product-4.jpg" alt="Image">
+                        <img src="assets/images/demo/product-4-2.jpg" alt="Image">
+                      </a>
+                    </figure>
+                    <div class="product-meta">
+                      <h3 class="product-title"><a href="#!">Red Analog Magazine Rack</a></h3>
+                      <div class="product-price">
+                        <span>$120</span>
+                        <span class="product-action">
+                          <a href="#!">Add to cart</a>
+                        </span>
+                      </div>
+                      <a href="#!" class="product-like"></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+{% endblock %}

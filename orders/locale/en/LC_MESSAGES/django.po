@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 20:07+0200\n"
+"POT-Creation-Date: 2023-04-18 20:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
 #: .\orders\models.py:10
 msgid "first name"
 msgstr ""
@@ -30,13 +31,17 @@ msgid "e-mail"
 msgstr ""
 
 #: .\orders\models.py:13
-msgid "address"
+msgid "phone number"
 msgstr ""
 
 #: .\orders\models.py:14
-msgid "postal code"
+msgid "address"
 msgstr ""
 
 #: .\orders\models.py:15
+msgid "postal code"
+msgstr ""
+
+#: .\orders\models.py:16
 msgid "city"
 msgstr ""

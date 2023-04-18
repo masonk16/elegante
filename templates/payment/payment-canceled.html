@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+    {% trans 'Payment Canceled' %}
+{% endblock %}
+
+{% block content %}
+    <!-- hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-10 col-lg-8">
+                    <span class="eyebrow decorated mb-1">{% trans 'CANCELED' %}</span>
+                    <h1 class="mb-2">{% trans 'Payment Canceled' %}</h1>
+                    <!-- blockquote -->
+                    <div class="row justify-content-center">
+                        <div class="col-md-10 col-lg-8">
+                            <blockquote class="blockquote">
+                                <p>
+                                    {% trans 'Your payment has not been processed.' %}
+                                </p>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

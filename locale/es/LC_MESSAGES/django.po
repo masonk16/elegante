@@ -1,22 +1,30 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# Copyright (C) 2023
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Mason Mapfundematsva <masonmapfunde@gmail.com>, 2023.
 #
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-12 19:57+0200\n"
+"POT-Creation-Date: 2023-04-18 20:13+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Last-Translator: Mason Mapfundematsva <masonmapfunde@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\cart\forms.py:9 .\templates\cart\cart-detail.html:40
+msgid "Quantity"
+msgstr "Cantidad"
+
+#: .\coupons\forms.py:6
+msgid "Coupon"
+msgstr ""
 
 #: .\elegante\settings.py:122
 msgid "English"
@@ -25,6 +33,306 @@ msgstr "Inglés"
 #: .\elegante\settings.py:123
 msgid "Spanish"
 msgstr "Español"
+
+#: .\templates\base.html:142
+msgid "Log In"
+msgstr ""
+
+#: .\templates\base.html:150
+msgid "Cart"
+msgstr ""
+
+#: .\templates\base.html:169
+msgid "Please keep shopping with us"
+msgstr ""
+
+#: .\templates\base.html:174
+msgid "Quick Links"
+msgstr ""
+
+#: .\templates\base.html:188 .\templates\base.html:192
+msgid "Subscribe"
+msgstr ""
+
+#: .\templates\base.html:218 .\templates\cart\cart-detail.html:7
+#: .\templates\cart\cart-detail.html:16 .\templates\orders\checkout.html:102
+msgid "Your Cart"
+msgstr ""
+
+#: .\templates\base.html:258
+msgid "View Cart"
+msgstr ""
+
+#: .\templates\base.html:261 .\templates\cart\cart-detail.html:121
+#: .\templates\orders\checkout.html:6 .\templates\orders\checkout.html:20
+#: .\templates\orders\checkout.html:33
+msgid "Checkout"
+msgstr "Compra"
+
+#: .\templates\base.html:276
+msgid "Type your search here"
+msgstr ""
+
+#: .\templates\cart\cart-detail.html:20
+#, fuzzy
+#| msgid "Continue shopping"
+msgid "Continue Shopping"
+msgstr "Seguir comprando"
+
+#: .\templates\cart\cart-detail.html:34
+#, fuzzy
+#| msgid "Products"
+msgid "Product"
+msgstr "Productos"
+
+#: .\templates\cart\cart-detail.html:37
+msgid "Price"
+msgstr ""
+
+#: .\templates\cart\cart-detail.html:43 .\templates\cart\cart-detail.html:105
+#: .\templates\orders\checkout.html:157
+msgid "Total"
+msgstr "Total"
+
+#: .\templates\cart\cart-detail.html:97 .\templates\orders\checkout.html:137
+#, fuzzy
+#| msgid "total"
+msgid "Subtotal"
+msgstr "total"
+
+#: .\templates\cart\cart-detail.html:99
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                                <td colspan=\"2\">\"%(code)s\"</td>\n"
+#| "                                <td>(%(discount)s%% off)</td>\n"
+#| "                                "
+msgid ""
+"\n"
+"                                <h5 class=\"media-title\">%(discount)s%% "
+"off</h5>\n"
+"                                <span class=\"small\">%(code)s</span>\n"
+"                            "
+msgstr ""
+"\n"
+"                                <td colspan=\"2\">\"%(code)s\"</td>\n"
+"                                <td>(%(discount)s%% descuento)</td>\n"
+"                                "
+
+#: .\templates\orders\checkout.html:18 .\templates\shop\product-detail.html:19
+#: .\templates\shop\product-listing.html:25
+msgid "Home"
+msgstr ""
+
+#: .\templates\orders\checkout.html:19 .\templates\shop\product-listing.html:30
+msgid "Shop"
+msgstr ""
+
+#: .\templates\orders\checkout.html:85
+msgid "Place order"
+msgstr "Realizar pedido"
+
+#: .\templates\orders\checkout.html:130
+msgid "Order Summary"
+msgstr ""
+
+#: .\templates\orders\checkout.html:142
+#, fuzzy, python-format
+#| msgid ""
+#| "\n"
+#| "                                    <span>\"%(code)s\"</span>\n"
+#| "                                    (%(discount)s%% off)\n"
+#| "                                "
+msgid ""
+"\n"
+"                                                    \"%(code)s\"\n"
+"                                                    <span>%(discount)s%% "
+"off</span>\n"
+"                                                "
+msgstr ""
+"\n"
+"                                    <span>\"%(code)s\"</span>\n"
+"                                    (%(discount)s%% descuento)\n"
+"                                "
+
+#: .\templates\orders\checkout.html:148
+msgid "Discount"
+msgstr ""
+
+#: .\templates\orders\order-created.html:6
+#: .\templates\orders\order-created.html:16
+msgid "Thank you"
+msgstr ""
+
+#: .\templates\orders\order-created.html:15
+msgid "ORDER CREATED"
+msgstr ""
+
+#: .\templates\orders\pdf.html:7 .\templates\orders\pdf.html:45
+msgid "Invoice no."
+msgstr "Factura no."
+
+#: .\templates\orders\pdf.html:30
+msgid "BILL TO"
+msgstr "Facturar a"
+
+#: .\templates\orders\pdf.html:47
+msgid "Date of Invoice"
+msgstr "Fecha de la factura"
+
+#: .\templates\orders\pdf.html:55
+msgid "PRODUCT"
+msgstr "Producto"
+
+#: .\templates\orders\pdf.html:56
+msgid "UNIT PRICE"
+msgstr "Precio unitario"
+
+#: .\templates\orders\pdf.html:57
+msgid "QUANTITY"
+msgstr "CANTIDAD"
+
+#: .\templates\orders\pdf.html:58
+msgid "TOTAL"
+msgstr "TOTAL"
+
+#: .\templates\orders\pdf.html:78
+msgid "SUBTOTAL"
+msgstr "TOTAL PARCIAL"
+
+#: .\templates\orders\pdf.html:85
+#, python-format
+msgid ""
+"\n"
+"                                <td colspan=\"2\">\"%(code)s\"</td>\n"
+"                                <td>(%(discount)s%% off)</td>\n"
+"                                "
+msgstr ""
+"\n"
+"                                <td colspan=\"2\">\"%(code)s\"</td>\n"
+"                                <td>(%(discount)s%% descuento)</td>\n"
+"                                "
+
+#: .\templates\orders\pdf.html:93
+msgid "GRAND TOTAL"
+msgstr "GRAN TOTAL"
+
+#: .\templates\orders\pdf.html:99
+msgid "Paid"
+msgstr "Pagado"
+
+#: .\templates\orders\pdf.html:99
+msgid "Pending payment"
+msgstr "Pendiente de pago"
+
+#: .\templates\orders\pdf.html:105
+msgid ""
+"Invoice was created on a computer and is valid without the signature and "
+"seal."
+msgstr ""
+"La factura se creó en una computadora y es válida sin la firma y el sello."
+
+#: .\templates\payment\payment-canceled.html:6
+#: .\templates\payment\payment-canceled.html:16
+msgid "Payment Canceled"
+msgstr ""
+
+#: .\templates\payment\payment-canceled.html:15
+msgid "CANCELED"
+msgstr ""
+
+#: .\templates\payment\payment-canceled.html:22
+msgid "Your payment has not been processed."
+msgstr ""
+
+#: .\templates\payment\payment-done.html:6
+msgid "Payment Successful"
+msgstr ""
+
+#: .\templates\payment\payment-done.html:15
+msgid "SUCCESS"
+msgstr ""
+
+#: .\templates\payment\payment-done.html:16
+msgid "Payment Successful!"
+msgstr ""
+
+#: .\templates\payment\payment-done.html:22
+msgid ""
+"Your payment has been processed successfully. Thank you for shopping with us"
+msgstr ""
+
+#: .\templates\payment\payment-process.html:6
+msgid "Pay by credit card"
+msgstr ""
+
+#: .\templates\payment\payment-process.html:17
+msgid "Card Number"
+msgstr ""
+
+#: .\templates\payment\payment-process.html:25
+msgid "Expiration Date"
+msgstr ""
+
+#: .\templates\payment\payment-process.html:29
+msgid "Pay"
+msgstr ""
+
+#: .\templates\shop\home.html:57
+#, fuzzy
+#| msgid "Products"
+msgid "Featured Products"
+msgstr "Productos"
+
+#: .\templates\shop\home.html:62
+msgid "New Arrivals"
+msgstr ""
+
+#: .\templates\shop\home.html:94 .\templates\shop\product-detail.html:109
+#: .\templates\shop\product-listing.html:170
+msgid "Add to cart"
+msgstr "Añadir a la cesta"
+
+#: .\templates\shop\home.html:183
+msgid "Blog Posts & News"
+msgstr ""
+
+#: .\templates\shop\product-listing.html:10
+#: .\templates\shop\product-listing.html:58
+msgid "Products"
+msgstr "Productos"
+
+#: .\templates\shop\product-listing.html:64
+msgid "Sort"
+msgstr ""
+
+#: .\templates\shop\product-listing.html:69
+msgid "Price: high to low"
+msgstr ""
+
+#: .\templates\shop\product-listing.html:72
+msgid "Price: low to high"
+msgstr ""
+
+#: .\templates\shop\product-listing.html:88
+msgid "Filter by Category"
+msgstr ""
+
+#: .\templates\shop\product-listing.html:91
+msgid "Categories"
+msgstr "Categorías"
+
+#: .\templates\shop\product-listing.html:106
+msgid "Filter by Size"
+msgstr ""
+
+#: .\templates\shop\product-listing.html:109
+msgid "Size"
+msgstr ""
+
+#: .\templates\shop\product-listing.html:137
+msgid "Filter by Price"
+msgstr ""
 
 #: .\venv\Lib\site-packages\click\_termui_impl.py:496
 #, python-brace-format
@@ -1417,8 +1725,10 @@ msgstr ""
 #: .\venv\Lib\site-packages\django\views\generic\dates.py:64
 #: .\venv\Lib\site-packages\django\views\generic\dates.py:115
 #: .\venv\Lib\site-packages\django\views\generic\dates.py:214
+#, fuzzy
+#| msgid "Date of Invoice"
 msgid "Date out of range"
-msgstr ""
+msgstr "Fecha de la factura"
 
 #: .\venv\Lib\site-packages\django\views\generic\dates.py:94
 msgid "No month specified"
@@ -1631,3 +1941,25 @@ msgstr ""
 msgctxt "stick"
 msgid "club"
 msgstr ""
+
+#~ msgid "Your shopping cart"
+#~ msgstr "tu carrito de la compra"
+
+#~ msgid "Shopping Cart"
+#~ msgstr "Carro de la compra"
+
+#~ msgid "Apply a coupon"
+#~ msgstr "Aplicar un cupón"
+
+#, python-format
+#~ msgid ""
+#~ "\n"
+#~ "                                \"%(code)s\" (%(discount)s%% off)\n"
+#~ "                                "
+#~ msgstr ""
+#~ "\n"
+#~ "                                \"%(code)s\" (%(discount)s%% descuento)\n"
+#~ "                                "
+
+#~ msgid "My shop"
+#~ msgstr "Mi tienda"

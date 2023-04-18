@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block title %}
+{%  trans 'Your Cart' %}
+{% endblock %}
+
+{% block content %}
+    <!-- hero -->
+    <section class="hero">
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    <h1>{% trans 'Your Cart' %}</h1>
+                </div>
+                <div class="col-md-4 text-md-right">
+                    <a href="{% url 'shop:product_list' %}" class="action eyebrow underline">
+                        {% trans 'Continue Shopping' %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="pt-0">
+        <div class="container">
+            <div class="row mb-0 d-none d-lg-flex">
+                <div class="col">
+                    <div class="row pr-6">
+                        <div class="col-lg-6">
+                            <span class="eyebrow">{% trans 'Product' %}</span>
+                        </div>
+                        <div class="col-lg-2 text-center">
+                            <span class="eyebrow">{% trans 'Price' %}</span>
+                        </div>
+                        <div class="col-lg-2 text-center">
+                            <span class="eyebrow">{% trans 'Quantity' %}</span>
+                        </div>
+                        <div class="col-lg-2 text-center">
+                            <span class="eyebrow">{% trans 'Total' %}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col cart-item-list cart-item-list-minimal">
+                    {% for item in cart %}
+                        {% with product=item.product %}
+                        <!-- cart item -->
+                        <div class="cart-item">
+                            <div class="row align-items-center">
+                                <div class="col-12 col-lg-6">
+                                    <div class="media media-product">
+                                        <a href="{{ product.get_absolute_url }}">
+                                            <img src="{% if product.image %}{{ product.image.url}}{% else %}{% static "img/no_image.png" %}{% endif %}" alt="{{ product.name }}"></a>
+                                        <div class="media-body">
+                                            <h5 class="media-title">{{ product.name }}</h5>
+                                            <span class="small">x{{ product.quantity }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-4 col-lg-2 text-center">
+                                    <span class="cart-item-price">${{ product.price }}</span>
+                                </div>
+                                <div class="col-4 col-lg-2 text-center">
+                                    <div class="counter">
+                                        <form action="{% url "cart:cart_add" product.id %}" method="post">
+                                            {% csrf_token %}
+                                            {{ item.update_quantity_form.quantity|add_class:"counter-value" }}
+                                            {{ item.update_quantity_form.override }}
+                                            <input type="submit" value="Update">
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="col-4 col-lg-2 text-center">
+                                    <span class="cart-item-price">${{ product.price }}</span>
+                                </div>
+                                <form action="{% url "cart:cart_remove" product.id %}" method="post">
+                                    {% csrf_token %}
+                                    <a type="submit" class="cart-item-close"><i class="icon-x"></i></a>
+                                </form>
+                            </div>
+                        </div>
+                        {% endwith %}
+                    {% endfor %}
+                </div>
+
+            </div>
+            <div class="row justify-content-between">
+                <div class="col-md-6 col-lg-4">
+                    <div class="inline-block">
+                        {% if cart.coupon %}
+                            <span class="eyebrow">{% trans 'Subtotal' %}</span>
+                            <h4 class="h2">${{ cart.get_total_price|floatformat:2 }}</h4>
+                            {% blocktrans with code=cart.coupon.code discount=cart.coupon.discount %}
+                                <h5 class="media-title">{{ discount }}% off</h5>
+                                <span class="small">{{ code }}</span>
+                            {% endblocktrans %}
+                            <h4 class="h2">- ${{ cart.get_discount|floatformat:2 }}</h4>
+                        {% endif %}
+                        <span class="eyebrow">{% trans 'Total' %}</span>
+                        <h4 class="h2">${{ cart.get_total_price_after_discount|floatformat:2 }}</h4>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="input-group">
+                        <form action="{% url "coupons:apply" %}" method="post">
+                            {% csrf_token %}
+                            {{ coupon_apply_form|add_class:"form-control"|append_attr:"placeholder:'Coupon Code'" }}
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-secondary btn-ico"><i class="icon-arrow-right"></i></button>
+                            </div>
+                        </form>
+                        <input type="text" class="form-control" placeholder="Coupon Code" aria-label="Coupon">
+
+                    </div>
+                    <a href="{% url "orders:order_create" %}" class="btn btn-lg btn-primary btn-block mt-1">{% trans "Checkout" %}</a>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
