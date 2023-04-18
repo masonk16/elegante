@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-18 20:13+0200\n"
-"PO-Revision-Date: 2023-04-18 20:47+0000\n"
+"POT-Creation-Date: 2023-04-18 21:04+0200\n"
+"PO-Revision-Date: 2023-04-18 21:11+0000\n"
 "Last-Translator:   <masonmapfunde@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
@@ -27,13 +27,47 @@ msgstr "Cantidad"
 msgid "Coupon"
 msgstr "Cupón"
 
-#: .\elegante\settings.py:122
+#: .\elegante\settings.py:123
 msgid "English"
 msgstr "Inglés"
 
-#: .\elegante\settings.py:123
+#: .\elegante\settings.py:124
 msgid "Spanish"
 msgstr "Español"
+
+#: .\elegante\urls.py:24
+msgid "admin/"
+msgstr "administración/"
+
+#: .\elegante\urls.py:25
+msgid "cart/"
+msgstr "carro/"
+
+#: .\elegante\urls.py:26
+msgid "orders/"
+msgstr "pedidos/"
+
+#: .\elegante\urls.py:27
+#| msgid "Pending payment"
+msgid "payment/"
+msgstr "pago/"
+
+#: .\elegante\urls.py:28
+#| msgid "Coupon"
+msgid "coupons/"
+msgstr "cupón/"
+
+#: .\payment\urls.py:8
+msgid "process/"
+msgstr "proceso/"
+
+#: .\payment\urls.py:9
+msgid "done/"
+msgstr "hecho"
+
+#: .\payment\urls.py:10
+msgid "canceled/"
+msgstr "cancelado"
 
 #: .\templates\base.html:142
 msgid "Log In"
@@ -75,12 +109,10 @@ msgid "Type your search here"
 msgstr "Escriba su búsqueda aquí"
 
 #: .\templates\cart\cart-detail.html:20
-#| msgid "Continue shopping"
 msgid "Continue Shopping"
 msgstr "Seguir comprando"
 
 #: .\templates\cart\cart-detail.html:34
-#| msgid "Products"
 msgid "Product"
 msgstr "Productos"
 
@@ -94,17 +126,11 @@ msgid "Total"
 msgstr "Total"
 
 #: .\templates\cart\cart-detail.html:97 .\templates\orders\checkout.html:137
-#| msgid "total"
 msgid "Subtotal"
 msgstr "Total parcial"
 
 #: .\templates\cart\cart-detail.html:99
 #, python-format
-#| msgid ""
-#| "\n"
-#| "                                <td colspan=\"2\">\"%(code)s\"</td>\n"
-#| "                                <td>(%(discount)s%% off)</td>\n"
-#| "                                "
 msgid ""
 "\n"
 "                                <h5 class=\"media-title\">%(discount)s%% off</h5>\n"
@@ -136,11 +162,6 @@ msgstr "Resumen del pedido"
 
 #: .\templates\orders\checkout.html:142
 #, python-format
-#| msgid ""
-#| "\n"
-#| "                                    <span>\"%(code)s\"</span>\n"
-#| "                                    (%(discount)s%% off)\n"
-#| "                                "
 msgid ""
 "\n"
 "                                                    \"%(code)s\"\n"
@@ -277,7 +298,6 @@ msgid "Pay"
 msgstr "Pagar"
 
 #: .\templates\shop\home.html:57
-#| msgid "Products"
 msgid "Featured Products"
 msgstr "Productos"
 
@@ -330,25 +350,3 @@ msgstr "Tamaño"
 #: .\templates\shop\product-listing.html:137
 msgid "Filter by Price"
 msgstr "Filtrar por Precio"
-
-#~ msgid "Your shopping cart"
-#~ msgstr "tu carrito de la compra"
-
-#~ msgid "Shopping Cart"
-#~ msgstr "Carro de la compra"
-
-#~ msgid "Apply a coupon"
-#~ msgstr "Aplicar un cupón"
-
-#, python-format
-#~ msgid ""
-#~ "\n"
-#~ "                                \"%(code)s\" (%(discount)s%% off)\n"
-#~ "                                "
-#~ msgstr ""
-#~ "\n"
-#~ "                                \"%(code)s\" (%(discount)s%% descuento)\n"
-#~ "                                "
-
-#~ msgid "My shop"
-#~ msgstr "Mi tienda"
