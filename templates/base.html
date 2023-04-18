@@ -151,6 +151,23 @@
                                 </a>
                                 {% endwith %}
                             </li>
+                            <li class="nav-item dropdown">
+                                {% get_current_language as LANGUAGE_CODE %}
+                                {% get_available_languages as LANGUAGES %}
+                                {% get_language_info_list for LANGUAGES as languages %}
+                                <a class="nav-link dropdown-toggle" href="#!" id="navbarDropdown-11" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    {{ LANGUAGE_CODE|upper }}
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown-11">
+                                    {% for language in languages %}
+                                        <li>
+                                            <a class="dropdown-item" href="/{{ language.code }}/" {% if language.code == LANGUAGE_CODE %} class="selected"{% endif %}>
+                                                {{ language.name_local|title }}
+                                            </a>
+                                        </li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                 </nav>
