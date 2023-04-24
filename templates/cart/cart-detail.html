@@ -110,7 +110,7 @@
                     <div class="input-group">
                         <form action="{% url "coupons:apply" %}" method="post">
                             {% csrf_token %}
-                            {{ coupon_apply_form|add_class:"form-control"|append_attr:"placeholder:'Coupon Code'" }}
+                            {{ coupon_apply_form }}
                             <div class="input-group-append">
                                 <button type="submit" class="btn btn-secondary btn-ico"><i class="icon-arrow-right"></i></button>
                             </div>

@@ -46,20 +46,20 @@
                     <div class="row gutter-1 justify-content-between">
                         <div class="col-lg-10 order-lg-2">
                             <div class="owl-carousel gallery" data-slider-id="1" data-thumbs="true" data-nav="true">
-                                {% for image in product.product_images %}
+{#                                {% for image in product.product_images_set.all %}#}
                                     <figure class="equal">
-                                        <a class="image" href="{{ image.url }}"
+                                        <a class="image" href="#"
                                         style="background-image: url({{ image.url }});">
                                         </a>
                                     </figure>
-                                {% endfor %}
+{#                                {% endfor %}#}
                             </div>
                         </div>
                         <div class="col-lg-2 text-center text-lg-left order-lg-1">
                             <div class="owl-thumbs" data-slider-id="1">
-                                {% for image in product.product_images %}
-                                    <span class="owl-thumb-item"><img src="{{ image.url }}" alt="{{ product.name }}"></span>
-                                {% endfor %}
+{#                                {% for image in product.product_images %}#}
+                                    <span class="owl-thumb-item"><img src="#" alt="{{ product.name }}"></span>
+{#                                {% endfor %}#}
                             </div>
                         </div>
                     </div>
@@ -104,7 +104,7 @@
                             <form class="row gutter-1 mb-6" action="{% url "cart:cart_add" product.id %}" method="post">
                             {% csrf_token %}
                             <div class="form-group col-md-2">
-                                {{ cart_product_form.quantity|add_class:"form-control" }}
+                                {{ cart_product_form.quantity }}
                             </div>
                             <button type="submit" class="btn btn-block btn-lg btn-primary" name="addtocart">{% trans 'Add to cart' %}</button>
                         </form>
