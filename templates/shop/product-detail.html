@@ -6,213 +6,160 @@
     {{ product.name }}
 {% endblock %}
 
+{% block jumbotron %}
+<!-- Heading -->
+    <div class="bg-primary">
+        <div class="container py-4">
+        <!-- Breadcrumb -->
+            <nav class="d-flex">
+                <h6 class="mb-0">
+                    <a href="{% url 'shop:home' %}" class="text-white-50">
+                        {% trans 'Home' %}
+                    </a>
+                    <span class="text-white-50 mx-2"> > </span>
+                    <a href="{% url 'shop:product_list' %}" class="text-white-50">
+                        {% trans 'Shop' %}
+                    </a>
+                    <span class="text-white-50 mx-2"> > </span>
+                    <a href="{{ product.category.get_absolute_url }}" class="text-white-50">
+                        {{ product.category.name }}
+                    </a>
+                    <span class="text-white-50 mx-2"> > </span>
+                    <a href="{{ product.get_absolute_url }}" class="text-white-50">
+                        {{ product.name }}
+                    </a>
+
+                </h6>
+            </nav>
+        <!-- Breadcrumb -->
+        </div>
+    </div>
+<!-- Heading -->
+{% endblock %}
+
 {% block content %}
-    <!-- breadcrumbs -->
-    <section class="breadcrumbs bg-light">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
-                                <a href="{% url 'shop:home' %}">
-                                    {% trans 'Home' %}
-                                </a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">
-                                <a href="{{ product.category.get_absolute_url }}">
-                                    {{ product.category.name }}
-                                </a>
-                            </li>
-                            <li class="breadcrumb-item active" aria-current="page">
-                                <a href="{{ product.get_absolute_url }}">
-                                    {{ product.name }}
-                                </a>
-                            </li>
-                        </ol>
-                    </nav>
+<!-- content -->
+<section class="py-5">
+    <div class="container">
+        <div class="row gx-5">
+            <aside class="col-lg-6">
+                <div class="border rounded-4 mb-3 d-flex justify-content-center">
+                    <a data-fslightbox="mygalley" class="rounded-4" target="_blank" data-type="image" href="">
+                        <img style="max-width: 100%; max-height: 100vh; margin: auto;" class="rounded-4 fit" src="" />
+                    </a>
                 </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- product -->
-    <section class="hero bg-light pt-5">
-        <div class="container">
-            <div class="row gutter-2 gutter-md-4 justify-content-between">
-
-                <div class="col-lg-7">
-                    <div class="row gutter-1 justify-content-between">
-                        <div class="col-lg-10 order-lg-2">
-                            <div class="owl-carousel gallery" data-slider-id="1" data-thumbs="true" data-nav="true">
-{#                                {% for image in product.product_images_set.all %}#}
-                                    <figure class="equal">
-                                        <a class="image" href="#"
-                                        style="background-image: url({{ image.url }});">
-                                        </a>
-                                    </figure>
-{#                                {% endfor %}#}
-                            </div>
-                        </div>
-                        <div class="col-lg-2 text-center text-lg-left order-lg-1">
-                            <div class="owl-thumbs" data-slider-id="1">
-{#                                {% for image in product.product_images %}#}
-                                    <span class="owl-thumb-item"><img src="#" alt="{{ product.name }}"></span>
-{#                                {% endfor %}#}
-                            </div>
-                        </div>
-                    </div>
+                <div class="d-flex justify-content-center mb-3">
+                    <a data-fslightbox="mygalley" class="border mx-1 rounded-2" target="_blank" data-type="image" href="" class="item-thumb">
+                        <img width="60" height="60" class="rounded-2" src="" />
+                    </a>
                 </div>
-
-                <div class="col-lg-5 mb-5 mb-lg-0">
-                    <div class="row">
-                        <div class="col-12">
-                            <span class="item-brand">{{ product.brand }}</span>
-                            <h1 class="item-title">{{ product.name }}</h1>
-                            <span class="item-price">${{ product.price }}</span>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <p>{{ product.description }}</p>
-                        </div>
-                    </div>
-                    <div class="row mb-4">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label>Color</label>
-                                <div class="btn-group-toggle btn-group-square btn-group-colors" data-toggle="buttons">
-                                    <label class="btn active text-red">
-                                        <input type="radio" name="options" id="option1-2" checked>
-                                    </label>
-                                    <label class="btn text-blue">
-                                        <input type="radio" name="options" id="option2-2">
-                                    </label>
-                                    <label class="btn text-yellow">
-                                        <input type="radio" name="options" id="option3-2">
-                                    </label>
-                                    <label class="btn text-green">
-                                        <input type="radio" name="options" id="option4-2">
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-8">
-                            <form class="row gutter-1 mb-6" action="{% url "cart:cart_add" product.id %}" method="post">
-                            {% csrf_token %}
-                            <div class="form-group col-md-2">
-                                {{ cart_product_form.quantity }}
-                            </div>
-                            <button type="submit" class="btn btn-block btn-lg btn-primary" name="addtocart">{% trans 'Add to cart' %}</button>
-                        </form>
-                        </div>
-                        <div class="col-12 mt-1">
-                            <ul class="nav nav-actions">
-                                <li class="nav-item">
-                                    <a class="nav-link" href="#">Add to wishlist</a>
-                                </li>
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Share this product</a>
-                                    <ul class="dropdown-menu">
-                                    <li>
-                                        <a class="dropdown-item" href="#">Facebook</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item" href="#">Twitter</a>
-                                    </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- info -->
-    <section class="separator-bottom">
-        <div class="container">
-            <div class="row gutter-2 gutter-lg-4">
-                <div class="col-md-4 col-lg-2">
-                    <div class="rate">
-                        <span>4.9</span>
-                        <a data-toggle="modal" data-target="#reviews" class="action eyebrow text-primary underline">View Reviews</a>
-                    </div>
-                </div>
-                <div class="col-md-8 col-lg-6">
-                    <p>{{ product.specification }}</p>
-                </div>
-                <div class="col-lg-4">
-                    <ul class="list-group list-group-line">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            SKU
-                            <span class="text-dark">{{ product.sku }}</span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Category
-                            <span class="text-dark">
-                                <a href="" class="underline text-dark">
-                                    {{ product.category.name }}
-                                </a>
+            <!-- thumbs-wrap.// -->
+            <!-- gallery-wrap .end// -->
+            </aside>
+            <main class="col-lg-6">
+                <div class="ps-lg-3">
+                    <h4 class="title text-dark">
+                       {{ product.name }}
+                    </h4>
+                    <div class="d-flex flex-row my-3">
+                        <div class="text-warning mb-1 me-2">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="ms-1">
+                                4.5
                             </span>
-                        </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            Tags
-                            <span class="text-dark"><a href="" class="underline text-dark">backpack</a>, <a href="" class="underline text-dark">minimal</a></span>
+                        </div>
+                        {% if product.available %}
+                            <span class="text-success ms-2">In stock</span>
+                        {% else %}
+                            <span class="text-success ms-2">In stock</span>
+                        {% endif %}
+
+                </div>
+
+                <div class="mb-3">
+                    <span class="h5">${{ product.price }}</span>
+                    <span class="text-muted">/per unit</span>
+                </div>
+
+                <p>
+                {{ product.description }}
+                </p>
+
+                <div class="row">
+                <dt class="col-3">Category:</dt>
+                <dd class="col-9">{{ product.category.name }}</dd>
+
+                <dt class="col-3">SKU:</dt>
+                <dd class="col-9">{{ product.sku }}</dd>
+
+                <dt class="col-3">Brand</dt>
+                <dd class="col-9">{{ product.brand }}</dd>
+                </div>
+
+                <hr />
+
+                <div class="row mb-4">
+
+                </div>
+                <form class="row gutter-1 mb-6" action="{% url "cart:cart_add" product.id %}" method="post">
+                {% csrf_token %}
+                    <label class="mb-2 d-block">Quantity</label>
+                <div class="form-group col-md-2">
+
+                    {{ cart_product_form.quantity }}
+                </div>
+                <button href="#" class="btn btn-primary shadow-0 col-md-3"> <i class="me-1 fa fa-shopping-basket"></i> {% trans 'Add to cart' %}</button>
+
+                </form>
+                </div>
+            </main>
+        </div>
+    </div>
+</section>
+<!-- content -->
+<section class="bg-light border-top py-4">
+    <div class="container">
+        <div class="row gx-4">
+            <div class="col-lg-8 mb-4">
+                <div class="border rounded-2 px-3 py-2 bg-white">
+                <!-- Pills navs -->
+                    <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+                        <li class="nav-item d-flex" role="presentation">
+                            <a class="nav-link d-flex align-items-center justify-content-center w-100 active" id="ex1-tab-1" data-mdb-toggle="pill" href="#ex1-pills-1" role="tab" aria-controls="ex1-pills-1" aria-selected="true">Specification</a>
                         </li>
                     </ul>
+                <!-- Pills navs -->
+
+                <!-- Pills content -->
+                <div class="tab-content" id="ex1-content">
+                    <div class="tab-pane fade show active" id="ex1-pills-1" role="tabpanel" aria-labelledby="ex1-tab-1">
+                        <p>
+                        {{ product.specification }}
+                        </p>
+                    </div>
+                </div>
+                <!-- Pills content -->
                 </div>
             </div>
-        </div>
-    </section>
-
-
-    <!-- related products -->
-    <section class="no-overflow">
-        <div class="container">
-            <div class="row">
-                <div class="col-12 mb-3">
-                    <ul class="nav nav-tabs lavalamp" id="myTab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">h3>{% trans "Related products" %}</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col">
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <div class="owl-carousel owl-carousel-arrows visible" data-items="[4,4,2,1]" data-margin="10" data-loop="true" data-dots="true" data-nav="true">
-                                <div class="product">
-                                    {% if recommended_products %}
-                                        {% for p in recommended_products %}
-                                            <figure class="product-image">
-                                                <a href="{{ p.get_absolute_url }}">
-                                                    <img src="{% if p.image %}{{ p.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
-                                                </a>
-                                            </figure>
-                                            <div class="product-meta">
-                                                <h3 class="product-title">
-                                                    <a href="{{ p.get_absolute_url }}">
-                                                        {{ p.name }}
-                                                    </a>
-                                                </h3>
-                                            <div class="product-price">
-                                                <span>
-                                                    ${{ p.price }}
-                                                </span>
-                                                <span class="product-action">
-                                                    <a href="#!">Add to cart</a>
-                                                </span>
-                                            </div>
-                                            <a href="#!" class="product-like"></a>
-                                            </div>
-                                        {% endfor %}
-                                    {% endif %}
+            <div class="col-lg-4">
+                <div class="px-0 border rounded-2 shadow-0">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Similar items</h5>
+                            <div class="d-flex mb-3">
+                                <a href="#" class="me-3">
+                                    <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/8.webp" style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" />
+                                </a>
+                                <div class="info">
+                                    <a href="#" class="nav-link mb-1">
+                                        Rucksack Backpack Large <br />
+                                        Line Mounts
+                                    </a>
+                                    <strong class="text-dark"> $38.90</strong>
                                 </div>
                             </div>
                         </div>
@@ -220,5 +167,8 @@
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+
 {% endblock %}
