@@ -7,137 +7,173 @@
 {%  trans 'Your Cart' %}
 {% endblock %}
 
-{% block content %}
-    <!-- hero -->
-    <section class="hero">
-        <div class="container">
-            <div class="row">
-                <div class="col text-center">
-                    <h1>{% trans 'Your Cart' %}</h1>
-                </div>
-                <div class="col-md-4 text-md-right">
-                    <a href="{% url 'shop:product_list' %}" class="action eyebrow underline">
-                        {% trans 'Continue Shopping' %}
+{% block jumbotron %}
+<!-- Heading -->
+    <div class="bg-primary">
+        <div class="container py-4">
+            <!-- Breadcrumb -->
+            <nav class="d-flex">
+                <h6 class="mb-0">
+                    <a href="{% url 'shop:home' %}" class="text-white-50">
+                        {% trans 'Home' %}
                     </a>
-                </div>
-            </div>
+                    <span class="text-white-50 mx-2"> > </span>
+                    <a href="{% url 'shop:product_list' %}" class="text-white-50">
+                        {% trans 'Shop' %}
+                    </a>
+                    <span class="text-white-50 mx-2"> > </span>
+                    <a href="{% url 'cart:cart_detail' %}" class="text-white-50">
+                        Your Cart
+                    </a>
+                </h6>
+            </nav>
+            <!-- Breadcrumb -->
         </div>
-    </section>
+    </div>
+<!-- Heading -->
+{% endblock %}
 
-
-    <section class="pt-0">
-        <div class="container">
-            <div class="row mb-0 d-none d-lg-flex">
-                <div class="col">
-                    <div class="row pr-6">
-                        <div class="col-lg-6">
-                            <span class="eyebrow">{% trans 'Product' %}</span>
-                        </div>
-                        <div class="col-lg-2 text-center">
-                            <span class="eyebrow">{% trans 'Price' %}</span>
-                        </div>
-                        <div class="col-lg-2 text-center">
-                            <span class="eyebrow">{% trans 'Quantity' %}</span>
-                        </div>
-                        <div class="col-lg-2 text-center">
-                            <span class="eyebrow">{% trans 'Total' %}</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-
-                <div class="col cart-item-list cart-item-list-minimal">
-                    {% for item in cart %}
-                        {% with product=item.product %}
-                        <!-- cart item -->
-                        <div class="cart-item">
-                            <div class="row align-items-center">
-                                <div class="col-12 col-lg-6">
-                                    <div class="media media-product">
-                                        <a href="{{ product.get_absolute_url }}">
-                                            <img src="{% if product.image %}{{ product.image.url}}{% else %}{% static "img/no_image.png" %}{% endif %}" alt="{{ product.name }}"></a>
-                                        <div class="media-body">
-                                            <h5 class="media-title">{{ product.name }}</h5>
-                                            <span class="small">x{{ product.quantity }}</span>
+{% block content %}
+<!-- cart + summary -->
+<section class="bg-light my-5">
+    <div class="container">
+        <div class="row">
+        <!-- cart -->
+            <div class="col-lg-9">
+                <div class="card border shadow-0">
+                    <div class="m-4">
+                        <h4 class="card-title mb-4">{% trans 'Your shopping cart' %}</h4>
+                        {% for item in cart %}
+                            {% with product=item.product %}
+                                <div class="row gy-3 mb-4">
+                                    <div class="col-lg-5">
+                                        <div class="me-lg-5">
+                                            <div class="d-flex">
+                                                <img src="" class="border rounded me-3" style="width: 96px; height: 96px;" />
+                                                <div class="">
+                                                    <a href="{{ product.get_absolute_url }}" class="nav-link">{{ product.name }}</a>
+                                                    <div class="">
+                                            <h6 class="h6">${{ product.price }} / per unit</h6> <br />
+                                        </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-4 col-lg-2 text-center">
-                                    <span class="cart-item-price">${{ product.price }}</span>
-                                </div>
-                                <div class="col-4 col-lg-2 text-center">
-                                    <div class="counter">
+                                    <div class="col-lg-2 col-sm-6 col-6 d-flex flex-row flex-lg-column flex-xl-row text-nowrap">
+                                        <div class="">
                                         <form action="{% url "cart:cart_add" product.id %}" method="post">
                                             {% csrf_token %}
                                             {{ item.update_quantity_form.quantity|add_class:"counter-value" }}
                                             {{ item.update_quantity_form.override }}
                                             <input type="submit" value="Update">
                                         </form>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-lg col-sm-6 d-flex justify-content-sm-center justify-content-md-start justify-content-lg-center justify-content-xl-end mb-2">
+                                        <div class="float-md-end">
+                                            <form action="{% url "cart:cart_remove" product.id %}" method="post">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-light border text-danger icon-hover-danger"> Remove</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="col-4 col-lg-2 text-center">
-                                    <span class="cart-item-price">${{ product.price }}</span>
-                                </div>
-                                <form action="{% url "cart:cart_remove" product.id %}" method="post">
-                                    {% csrf_token %}
-                                    <a type="submit" class="cart-item-close"><i class="icon-x"></i></a>
-                                </form>
-                            </div>
-                        </div>
-                        {% endwith %}
-                    {% endfor %}
-                </div>
+                            {% endwith %}
+                        {% endfor %}
+                    </div>
 
-            </div>
-            <div class="row justify-content-between">
-                <div class="col-md-6 col-lg-4">
-                    <div class="inline-block">
-                        {% if cart.coupon %}
-                            <span class="eyebrow">{% trans 'Subtotal' %}</span>
-                            <h4 class="h2">${{ cart.get_total_price|floatformat:2 }}</h4>
-                            {% blocktrans with code=cart.coupon.code discount=cart.coupon.discount %}
-                                <h5 class="media-title">{{ discount }}% off</h5>
-                                <span class="small">{{ code }}</span>
-                            {% endblocktrans %}
-                            <h4 class="h2">- ${{ cart.get_discount|floatformat:2 }}</h4>
-                        {% endif %}
-                        <span class="eyebrow">{% trans 'Total' %}</span>
-                        <h4 class="h2">${{ cart.get_total_price_after_discount|floatformat:2 }}</h4>
+                    <div class="border-top pt-4 mx-4 mb-4">
+                        <p><i class="fas fa-truck text-muted fa-lg"></i> Free Delivery within 1-2 weeks</p>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="input-group">
+            </div>
+        <!-- cart -->
+        <!-- summary -->
+            <div class="col-lg-3">
+                <div class="card mb-3 border shadow-0">
+                    <div class="card-body">
                         <form action="{% url "coupons:apply" %}" method="post">
-                            {% csrf_token %}
-                            {{ coupon_apply_form }}
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-secondary btn-ico"><i class="icon-arrow-right"></i></button>
+                            <div class="form-group">
+                                <label class="form-label">Have a coupon?</label>
+                                <div class="input-group">
+                                    {% csrf_token %}
+                                    {{ coupon_apply_form.code }}
+                                    <button type="submit" class="btn btn-light border">Redeem</button>
+                                </div>
                             </div>
                         </form>
-                        <input type="text" class="form-control" placeholder="Coupon Code" aria-label="Coupon">
-
                     </div>
-                    <a href="{% url "orders:order_create" %}" class="btn btn-lg btn-primary btn-block mt-1">{% trans "Checkout" %}</a>
+                </div>
+                <div class="card shadow-0 border">
+                    <div class="card-body">
+                        {% if cart.coupon %}
+                            <div class="d-flex justify-content-between">
+                                <p class="mb-2">{% trans 'Subtotal' %}:</p>
+                                <p class="mb-2">${{ cart.get_total_price|floatformat:2 }}</p>
+                            </div>
+                            {% blocktrans with code=cart.coupon.code discount=cart.coupon.discount %}
+                                <div class="d-flex justify-content-between">
+                                    <p class="mb-2">{{ code }}</p>
+                                    <p class="mb-2 ">{{ discount }}% off</p>
+                                </div>
+                            {% endblocktrans %}
+
+                            <div class="d-flex justify-content-between">
+                                <p class="mb-2">{% trans 'Discount' %}:</p>
+                                <p class="mb-2 text-success">- ${{ cart.get_discount|floatformat:2 }}</p>
+                            </div>
+                        {% endif %}
+                        <hr />
+                        <div class="d-flex justify-content-between">
+                            <p class="mb-2">{% trans 'Total' %}:</p>
+                            <p class="mb-2 fw-bold">${{ cart.get_total_price_after_discount|floatformat:2 }}</p>
+                        </div>
+
+                        <div class="mt-3">
+                            <a href="{% url "orders:order_create" %}" class="btn btn-success w-100 shadow-0 mb-2"> {% trans 'Checkout' %} </a>
+                            <a href="{% url 'shop:product_list' %}" class="btn btn-light w-100 border mt-2"> {% trans 'Continue Shopping' %} </a>
+                        </div>
+                    </div>
                 </div>
             </div>
+        <!-- summary -->
         </div>
-    </section>
-    {% if recommended_products %}
-        <div class="recommendations cart">
-            <h3>{% trans "People who bought this also bought" %}</h3>
+    </div>
+</section>
+<!-- cart + summary -->
+<section>
+    <div class="container my-5">
+        <header class="mb-4">
+            <h3>{% trans 'Recommended items' %}</h3>
+        </header>
+
+        <div class="row">
             {% for p in recommended_products %}
-                <div class="item">
-                    <a href="{{ p.get_absolute_url }}">
-                        <img src="{% if p.image %}{{ p.image.url }}{% else %}   {% static "img/no_image.png" %}{% endif %}">
-                    </a>
-                    <p>
-                        <a href="{{ p.get_absolute_url }}">
-                            {{ p.name }}
+                <div class="col-lg-3 col-md-6 col-sm-6">
+                    <div class="card px-4 border shadow-0 mb-4 mb-lg-0">
+                        <div class="mask px-2" style="height: 50px;">
+                            <div class="d-flex justify-content-between">
+                                <a href="#"><i class="fas fa-heart text-primary fa-lg float-end pt-3 m-2"></i></a>
+                            </div>
+                        </div>
+                        <a href="{{ p.get_absolute_url }}" class="">
+                            <img src="#" class="card-img-top rounded-2" />
                         </a>
-                    </p>
+                        <div class="card-body d-flex flex-column pt-3 border-top">
+                            <a href="{{ p.get_absolute_url }}" class="nav-link">{{ p.name }}</a>
+                            <div class="price-wrap mb-2">
+                                <strong class="">${{ p.price }}</strong>
+                            </div>
+                            <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
+                                <a href="{{ product.get_absolute_url }}" class="btn btn-outline-primary w-100">View Product</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             {% endfor %}
         </div>
-    {% endif %}
+    </div>
+</section>
+<!-- Recommended -->
 {% endblock %}

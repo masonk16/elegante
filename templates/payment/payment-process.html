@@ -1,4 +1,4 @@
-{% extends "shop/base.html" %}
+{% extends "base.html" %}
 {% load i18n %}
 {% load widget_tweaks %}
 
@@ -6,28 +6,63 @@
 {%  trans 'Pay by credit card' %}
 {% endblock %}
 
+{% block jumbotron %}
+<!-- Heading -->
+<div class="bg-primary">
+    <div class="container py-4">
+    <!-- Breadcrumb -->
+        <nav class="d-flex">
+            <h6 class="mb-0">
+                <a href="{% url 'shop:home' %}" class="text-white-50">{%  trans 'Home' %}</a>
+                <span class="text-white-50 mx-2"> > </span>
+                <a href="{% url 'cart:cart_detail' %}" class="text-white-50">2. {% trans 'Shopping cart' %}</a>
+                <span class="text-white-50 mx-2"> > </span>
+                <a href="{% url "orders:order_create" %}" class="text-white-50"><u>3. {% trans 'Order info' %}</u></a>
+                <span class="text-white mx-2"> > </span>
+                <a href="" class="text-white">4. {% trans 'Payment' %}</a>
+            </h6>
+        </nav>
+    <!-- Breadcrumb -->
+    </div>
+</div>
+<!-- Heading -->
+{% endblock %}
+
 {% block content %}
- <section class="hero">
+<section class="bg-light py-5">
     <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-10 col-lg-8">
-                <form id="payment" method="post">
-                {% csrf_token %}
-                <div class="form-group col-md-8">
-                    <label for="card-number">{% trans 'Card Number' %}</label>
-                    <div id="card-number" class="field form-control"></div>
+        <div class="row justify-content-center mb-4">
+            <div class="card mb-4 border col-md-7 col-lg-6">
+                <div class="card-body">
+                    <h5 class="card-title mb-4">{% trans 'Pay by Credit Card' %}</h5>
+                    <form id="payment" method="post">
+                    {% csrf_token %}
+                        <!-- Email input -->
+                        <div class="form-outline mb-4 form-group">
+                            <div id="card-number" class="field form-control" style="height: 35px;"></div>
+                            <label class="form-label" for="card-number">{% trans 'Card Number' %}</label>
+                        </div>
+
+                        <!-- 2 column grid layout with text inputs for the first and last names -->
+                        <div class="row mb-4">
+                            <div class="col">
+                                <div class="form-outline form-group">
+                                    <div id="cvv" class="field form-control" style="height: 35px;"></div>
+                                    <label class="form-label" for="cvv">CVV</label>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-outline form-group">
+                                    <div id="expiration-date" class="field form-control" style="height: 35px;"></div>
+                                    <label class="form-label" for="form3Example2">{% trans 'Expiration Date' %}</label>
+                                </div>
+                            </div>
+                        </div>
+                        <input type="hidden" id="nonce" name="payment_method_nonce" value="">
+                        <!-- Submit button -->
+                        <input type="submit" class="btn btn-primary btn-block mb-4" value="{% trans 'Pay' %}">
+                    </form>
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="cvv">CVV</label>
-                    <div id="cvv" class="field form-control"></div>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="expiration-date">{% trans 'Expiration Date' %}</label>
-                    <div id="expiration-date" class="field form-control"></div>
-                </div>
-                <input type="hidden" id="nonce" name="payment_method_nonce" value="">
-                <input type="submit" class="btn btn-primary btn-lg btn-block" value="{% trans 'Pay' %}">
-            </form>
             </div>
         </div>
     </div>
@@ -50,7 +85,7 @@
         braintree.hostedFields.create({
             client: clientInstance,
             styles: {
-                'input': {'font-size': '13px'},
+                'input': {'font-size': '13px', 'height': '25px'},
                 'input.invalid': {'color': 'red'},
                 'input.valid': {'color': 'green'}
             },

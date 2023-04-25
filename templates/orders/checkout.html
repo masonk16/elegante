@@ -1,4 +1,4 @@
-{% extends "shop/base.html" %}
+{% extends "base.html" %}
 {% load i18n %}
 {% load widget_tweaks %}
 
@@ -6,166 +6,157 @@
 {%  trans 'Checkout' %}
 {% endblock %}
 
+{% block jumbotron %}
+<!-- Heading -->
+<div class="bg-primary">
+    <div class="container py-4">
+    <!-- Breadcrumb -->
+        <nav class="d-flex">
+            <h6 class="mb-0">
+                <a href="{% url 'shop:home' %}" class="text-white-50">{%  trans 'Home' %}</a>
+                <span class="text-white-50 mx-2"> > </span>
+                <a href="{% url 'cart:cart_detail' %}" class="text-white-50">2. {% trans 'Shopping cart' %}</a>
+                <span class="text-white-50 mx-2"> > </span>
+                <a href="{% url "orders:order_create" %}" class="text-white"><u>3. {% trans 'Order info' %}</u></a>
+                <span class="text-white-50 mx-2"> > </span>
+                <a href="" class="text-white-50">4. {% trans 'Payment' %}</a>
+            </h6>
+        </nav>
+    <!-- Breadcrumb -->
+    </div>
+</div>
+<!-- Heading -->
+{% endblock %}
+
 {% block content %}
-
-    <!-- breadcrumbs -->
-    <section class="breadcrumbs separator-bottom">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{% url 'shop:home' %}">{%  trans 'Home' %}</a></li>
-                            <li class="breadcrumb-item"><a href="{% url 'shop:product_list' %}">{%  trans 'Shop' %}</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">{%  trans 'Checkout' %}</li>
-                        </ol>
-                    </nav>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- hero -->
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col text-center">
-                    <h1>{%  trans 'Checkout' %}</h1>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="no-overflow pt-0">
-        <div class="container">
-            <div class="row gutter-4 justify-content-between">
-
-
-                <div class="col-lg-8">
-
-                <!-- delivery -->
-                    <div class="row align-items-end mb-2">
-                        <div class="col-md-6">
-                            <h2 class="h3 mb-0"><span class="text-muted">01.</span> Billing Details</h2>
+<section class="bg-light py-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xl-7 col-lg-7 mb-4">
+                <div class="card mb-4 border shadow-0">
+                    <div class="p-4 d-flex justify-content-between">
+                        <div class="">
+                            <h5>Have an account?</h5>
+                            <p class="mb-0 text-wrap ">Login to keep track of your orders</p>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-center flex-column flex-md-row">
+                            <a href="#" class="btn btn-outline-primary me-0 me-md-2 mb-2 mb-md-0 w-100">Register</a>
+                            <a href="#" class="btn btn-primary shadow-0 text-nowrap w-100">Sign in</a>
                         </div>
                     </div>
-                    <form action="#" method="post" class="row gutter-1 mb-6">
-                        {% csrf_token %}
-                        <div class="form-group col-md-6">
-                            <label>First Name</label>
-                            {{ form.first_name|add_class:"form-control" }}
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label>Last Name</label>
-                            {{ form.last_name|add_class:"form-control" }}
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label>Email</label>
-                            {{ form.email|add_class:"form-control" }}
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label>Phone Number</label>
-                            {{ form.phone_number|add_class:"form-control" }}
-                        </div>
-                        <div class="form-group col-md-12">
-                            <label>Address</label>
-                            {{ form.address|add_class:"form-control" }}
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label>Postal Code</label>
-                            {{ form.postal_code|add_class:"form-control" }}
-                        </div>
-                        <div class="form-group col-md-8">
-                            <label>City</label>
-                            {{ form.city|add_class:"form-control" }}
-                        </div>
-                        <!-- place order -->
-                        <div class="col-12 mt-1">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block">
-                                {% trans "Place order" %}
-                            </button>
-                        </div>
-
-                    </form>
                 </div>
 
-
-                <aside class="col-lg-4">
-                    <div class="row">
-
-                    <!-- order preview -->
-                        <div class="col-12">
-                            <div class="card card-data bg-light">
-                                <div class="card-header py-2 px-3">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <h3 class="fs-18 mb-0">{% trans 'Your Cart' %}</h3>
-                                        </div>
-                                        <div class="col text-right">
-                                            <a href="{% url 'cart:cart_detail' %}" class="underline eyebrow">
-                                                Edit
-                                            </a>
-                                        </div>
+            <!-- Checkout -->
+                <div class="card shadow-0 border">
+                    <div class="p-4">
+                        <h5 class="card-title mb-3">{%  trans 'Checkout' %}</h5>
+                        <div class="row">
+                            <form action="#" method="post">
+                                {% csrf_token %}
+                                <div class="col-6 mb-3">
+                                    <p class="mb-0">First name</p>
+                                    <div class="form-outline">
+                                        {{ form.first_name|add_class:"form-control" }}
                                     </div>
                                 </div>
-                                <div class="card-body">
-                                    <ul class="list-group list-group-line">
-                                        {% for item in cart %}
-                                        <li class="list-group-item d-flex justify-content-between text-dark align-items-center">
-                                            {{ item.product.name }} x{{ item.quantity }}
-                                            <span>${{ item.total_price|floatformat:2 }}</span>
-                                        </li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
 
-                        <!-- order summary -->
-                        <div class="col-12 mt-1">
-                            <div class="card card-data bg-light">
-                                <div class="card-header py-2 px-3">
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <h3 class="fs-18 mb-0">{% trans 'Order Summary' %}</h3>
-                                        </div>
+                                <div class="col-6">
+                                    <p class="mb-0">Last name</p>
+                                    <div class="form-outline">
+                                        {{ form.last_name|add_class:"form-control" }}
                                     </div>
                                 </div>
-                                <div class="card-body">
-                                    <ul class="list-group list-group-minimal">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            {% trans 'Subtotal' %}
-                                            <span>${{ cart.get_total_price|floatformat:2 }}</span>
-                                        </li>
-                                        {% if cart.coupon %}
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                {% blocktrans with code=cart.coupon.code discount=cart.coupon.discount %}
-                                                    "{{ code }}"
-                                                    <span>{{ discount }}% off</span>
-                                                {% endblocktrans %}
-                                            </li>
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                {% trans 'Discount' %}
-                                                <span>- ${{ cart.get_discount|floatformat:2 }}</span>
-                                            </li>
-                                        {% endif %}
-                                    </ul>
-                                </div>
-                                <div class="card-footer py-2">
-                                    <ul class="list-group list-group-minimal">
-                                        <li class="list-group-item d-flex justify-content-between align-items-center text-dark fs-18">
-                                            {% trans 'Total' %}
-                                            <span>${{ cart.get_total_price_after_discount|floatformat:2 }}</span>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
 
+                                <div class="col-6 mb-3">
+                                    <p class="mb-0">Email</p>
+                                    <div class="form-outline">
+                                        {{ form.email|add_class:"form-control" }}
+                                    </div>
+                                </div>
+
+                                <div class="col-6 mb-3">
+                                    <p class="mb-0">Phone Number</p>
+                                    <div class="form-outline">
+                                        {{ form.phone_number|add_class:"form-control" }}
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-10 mb-3">
+                                    <p class="mb-0">Address</p>
+                                    <div class="form-outline">
+                                        {{ form.address|add_class:"form-control" }}
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-3 col-6 mb-3">
+                                    <p class="mb-0">Postal code</p>
+                                    <div class="form-outline">
+                                        {{ form.postal_code|add_class:"form-control" }}
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-4 mb-3">
+                                    <p class="mb-0">City</p>
+                                    <div class="form-outline">
+                                        {{ form.city|add_class:"form-control" }}
+                                    </div>
+                                </div>
+
+                                <div class="float-end">
+                                <button type="submit" class="btn btn-success shadow-0 border">{% trans "Place order" %}</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </aside>
+                </div>
+            <!-- Checkout -->
+            </div>
+            <div class="col-xl-5 col-lg-5 d-flex justify-content-center ">
+                <div class="ms-lg-4 mt-4 mt-lg-0" style="max-width: 320px;">
+                    <h6 class="mb-3">{% trans 'Summary' %}</h6>
+                    <div class="d-flex justify-content-between">
+                        <p class="mb-2">{% trans 'Subtotal' %}:</p>
+                        <p class="mb-2">${{ cart.get_total_price|floatformat:2 }}</p>
+                    </div>
+                    {% if cart.coupon %}
+                    <div class="d-flex justify-content-between">
+                    {% blocktrans with code=cart.coupon.code discount=cart.coupon.discount %}
+                        <p class="mb-2">"{{ code }}"</p>
+                        <p class="mb-2">{{ discount }}% off</p>
+                    {% endblocktrans %}
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <p class="mb-2">{% trans 'Discount' %}</p>
+                        <p class="mb-2 text-danger">- ${{ cart.get_discount|floatformat:2 }}</p>
+                    </div>
+                    {% endif %}
+                    <hr />
+                    <div class="d-flex justify-content-between">
+                        <p class="mb-2">{% trans 'Total' %}:</p>
+                        <p class="mb-2 fw-bold">${{ cart.get_total_price_after_discount|floatformat:2 }}</p>
+                    </div>
 
+                    <hr />
+                    <h6 class="text-dark my-4">{% trans 'Items in cart' %}</h6>
+                    {% for item in cart %}
+                        <div class="d-flex align-items-center mb-4">
+                            <div class="me-3 position-relative">
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill badge-secondary">
+                                    {{ item.quantity }}
+                                </span>
+                                <img src="" style="height: 96px; width: 96px;" class="img-sm rounded border" />
+                            </div>
+                            <div class="">
+                                <a href="#" class="nav-link">
+                                {{ item.product.name }}
+                                </a>
+                                <div class="price text-muted">Total: ${{ item.total_price|floatformat:2 }}</div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 {% endblock %}
