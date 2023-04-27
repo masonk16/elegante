@@ -148,25 +148,29 @@
                 </div>
             </div>
             <div class="col-lg-4">
-                <div class="px-0 border rounded-2 shadow-0">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">{% trans 'Similar items' %}</h5>
-                            <div class="d-flex mb-3">
-                                <a href="#" class="me-3">
-                                    <img src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/items/8.webp" style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" />
-                                </a>
-                                <div class="info">
-                                    <a href="#" class="nav-link mb-1">
-                                        Rucksack Backpack Large <br />
-                                        Line Mounts
-                                    </a>
-                                    <strong class="text-dark"> $38.90</strong>
-                                </div>
+                {% if recommended_products %}
+                    <div class="px-0 border rounded-2 shadow-0">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{% trans 'Similar items' %}</h5>
+                                {% for p in recommended_products %}
+                                    <div class="d-flex mb-3">
+                                        <a href="{{ p.get_absolute_url }}" class="me-3">
+                                            <img src="{{ p.product_images.first }}" style="min-width: 96px; height: 96px;" class="img-md img-thumbnail" />
+                                        </a>
+                                        <div class="info">
+                                            <a href="{{ p.get_absolute_url }}" class="nav-link mb-1">
+                                                {{ p.name }} <br />
+                                                {{ p.category }}
+                                            </a>
+                                            <strong class="text-dark"> ${{ p.price }}</strong>
+                                        </div>
+                                    </div>
+                                {% endfor %}
                             </div>
                         </div>
                     </div>
-                </div>
+                {% endif %}
             </div>
         </div>
     </div>
