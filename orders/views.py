@@ -4,21 +4,24 @@ from django.template.loader import render_to_string
 from django.contrib.admin.views.decorators import staff_member_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-
+from django.contrib.auth.decorators import login_required
 import weasyprint
-
 from .models import OrderItem, Order
 from .forms import OrderCreateForm
 from cart.cart import Cart
 from .tasks import order_created
 
 
+@login_required
 def order_create(request):
     cart = Cart(request)
     if request.method == "POST":
         form = OrderCreateForm(request.POST)
         if form.is_valid():
             order = form.save(commit=False)
+            order.customer = request.user
+            order.total_items = len(cart)
+            order.total_price = cart.get_total_price_after_discount()
             if cart.coupon:
                 order.coupon = cart.coupon
                 order.discount = cart.coupon.discount

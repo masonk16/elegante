@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-18 21:04+0200\n"
+"POT-Creation-Date: 2023-04-26 23:38+0200\n"
 "PO-Revision-Date: 2023-04-18 21:09+0000\n"
 "Last-Translator:   <masonmapfunde@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,31 +19,31 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Translated-Using: django-rosetta 0.9.9\n"
 
-#: .\orders\models.py:10
+#: .\orders\models.py:12
 msgid "first name"
 msgstr "nombre"
 
-#: .\orders\models.py:11
+#: .\orders\models.py:13
 msgid "last name"
 msgstr "apellidos"
 
-#: .\orders\models.py:12
+#: .\orders\models.py:14
 msgid "e-mail"
 msgstr "e-mail"
 
-#: .\orders\models.py:13
+#: .\orders\models.py:15
 msgid "phone number"
 msgstr "número de teléfono"
 
-#: .\orders\models.py:14
+#: .\orders\models.py:16
 msgid "address"
 msgstr "dirección"
 
-#: .\orders\models.py:15
+#: .\orders\models.py:17
 msgid "postal code"
 msgstr "código postal"
 
-#: .\orders\models.py:16
+#: .\orders\models.py:18
 msgid "city"
 msgstr "ciudad"
 

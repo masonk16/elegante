@@ -1,4 +1,6 @@
 {% load static %}
+{% load i18n %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +13,7 @@
 </head>
 <body>
 <!--Main Navigation-->
-<header>
+<header class="justify-content-center">
   <!-- Jumbotron -->
     <div class="p-3 text-center bg-white border-bottom">
         <div class="container">
@@ -27,30 +29,53 @@
             <!-- Center elements -->
                 <div class="order-lg-last col-lg-5 col-sm-8 col-8">
                     <div class="d-flex float-end">
-                        <a href="#" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
-                            <i class="fa-solid fa-user-alt m-1 me-md-2"></i>
-                            <p class="d-none d-md-block mb-0">Sign in</p>
-                        </a>
-                        <a href="#" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
-                            <i class="fa-solid fa-heart m-1 me-md-2"></i>
-                            <p class="d-none d-md-block mb-0">Wishlist</p>
-                        </a>
-                        <a href="#" class="border rounded py-1 px-3 nav-link d-flex align-items-center">
+                        {% if request.user.is_authenticated %}
+                            <a href="{% url 'account:user_detail' username=request.user.username %}" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
+                                <i class="fa-solid fa-user-alt m-1 me-md-2"></i>
+                                <p class="d-none d-md-block mb-0">{{ request.user.first_name }}</p>
+                            </a>
+                            <a href="{% url 'account:logout' %}" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
+                                <i class="fa-solid fa-heart m-1 me-md-2"></i>
+                                <p class="d-none d-md-block mb-0">{% trans 'Logout' %}</p>
+                            </a>
+                        {% else %}
+                            <a href="{% url 'account:register' %}" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
+                                <i class="fa-solid fa-user-alt m-1 me-md-2"></i>
+                                <p class="d-none d-md-block mb-0">{% trans 'Register' %}</p>
+                            </a>
+                             <a href="{% url 'account:login' %}" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
+                                <i class="fa-solid fa-user-alt m-1 me-md-2"></i>
+                                <p class="d-none d-md-block mb-0">{% trans 'Login' %}</p>
+                             </a>
+                        {% endif %}
+
+                        <a href="{% url 'cart:cart_detail' %}" class="border rounded py-1 px-3 nav-link d-flex align-items-center">
                             <i class="fa-solid fa-shopping-cart m-1 me-md-2"></i>
-                            <p class="d-none d-md-block mb-0">My cart</p>
+                            <p class="d-none d-md-block mb-0">
+                                {% trans 'Cart' %}
+                                {% with total_items=cart|length %}
+                                    ({{ total_items }})
+                                {% endwith %}
+                            </p>
                         </a>
+                        <!--- language selector --->
+                {% get_current_language as LANGUAGE_CODE %}
+                {% get_available_languages as LANGUAGES %}
+                {% get_language_info_list for LANGUAGES as languages %}
+                <div>
+                    {% for language in languages %}
+                        <a class="btn {% if language.code == LANGUAGE_CODE %} btn-primary {% else %} btn-tertiary {% endif %}" href="/{{ language.code }}/" role="button">
+                            {{ language.code|upper }}
+                        </a>
+                    {% endfor %}
+                </div><!--- language selector --->
                     </div>
                 </div>
             <!-- Center elements -->
 
             <!-- Right elements -->
                 <div class="col-lg-5 col-md-12 col-12">
-                    <form>
-                        <div class="input-group form-control">
-                            <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-                            <button type="button" class="btn btn-outline-primary"><i class="fas fa-search"></i> Search</button>
-                        </div>
-                    </form>
+
                 </div>
             <!-- Right elements -->
             </div>
@@ -68,14 +93,14 @@
         </button>
 
         <!-- Collapsible wrapper -->
-            <div class="collapse navbar-collapse" id="navbarLeftAlignExample">
+            <div class="collapse navbar-collapse justify-content-center" id="navbarLeftAlignExample">
             <!-- Left links -->
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link text-dark" aria-current="page" href="{% url 'shop:home' %}">Home</a>
+                        <a class="nav-link text-dark" aria-current="page" href="{% url 'shop:home' %}">{% trans 'Home' %}</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="{% url 'shop:product_list' %}">Shop</a>
+                        <a class="nav-link text-dark" href="{% url 'shop:product_list' %}">{% trans 'Shop' %}</a>
                     </li>
                 </ul>
             <!-- Left links -->
@@ -97,116 +122,26 @@
 {% endblock %}
 <!-- Footer -->
 <footer class="text-center text-lg-start text-muted mt-3" style="background-color: #f5f5f5;">
-<!-- Section: Links  -->
-    <section class="">
-        <div class="container text-center text-md-start pt-4 pb-4">
-        <!-- Grid row -->
-            <div class="row mt-3">
-            <!-- Grid column -->
-                <div class="col-12 col-lg-3 col-sm-12 mb-2">
+    <div class="">
+        <div class="container">
+            <div class="d-flex justify-content-between py-4 border-top">
+                <!--- payment --->
+                <div>
+                    <i class="fa-brands fa-cc-visa"></i>
+                    <i class="fa-brands fa-cc-amex"></i>
+                    <i class="fa-brands fa-cc-mastercard"></i>
+                    <i class="fa-brands fa-cc-paypal"></i>
+                </div>
+                <!--- payment --->
+                <div>
                 <!-- Content -->
-                    <a href="{% url 'shop:home' %}" target="_blank" class="">
-                        <img src="https://i.imgur.com/Rg4U9sV.png" height="50" />
-                    </a>
                     <p class="mt-2 text-dark">
                         © 2023 Copyright: Elegante
                     </p>
                 </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-                <div class="col-6 col-sm-4 col-lg-2">
-                <!-- Links -->
-                    <h6 class="text-uppercase text-dark fw-bold mb-2">
-                        Store
-                    </h6>
-                    <ul class="list-unstyled mb-4">
-                        <li><a class="text-muted" href="#">About us</a></li>
-                        <li><a class="text-muted" href="#">Find store</a></li>
-                        <li><a class="text-muted" href="#">Categories</a></li>
-                        <li><a class="text-muted" href="#">Blogs</a></li>
-                    </ul>
-                </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-                <div class="col-6 col-sm-4 col-lg-2">
-                <!-- Links -->
-                    <h6 class="text-uppercase text-dark fw-bold mb-2">
-                        Information
-                    </h6>
-                    <ul class="list-unstyled mb-4">
-                        <li><a class="text-muted" href="#">Help center</a></li>
-                        <li><a class="text-muted" href="#">Money refund</a></li>
-                        <li><a class="text-muted" href="#">Shipping info</a></li>
-                        <li><a class="text-muted" href="#">Refunds</a></li>
-                    </ul>
-                </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-                <div class="col-6 col-sm-4 col-lg-2">
-                <!-- Links -->
-                    <h6 class="text-uppercase text-dark fw-bold mb-2">
-                        Support
-                    </h6>
-                    <ul class="list-unstyled mb-4">
-                        <li><a class="text-muted" href="#">Help center</a></li>
-                        <li><a class="text-muted" href="#">Documents</a></li>
-                        <li><a class="text-muted" href="#">Account restore</a></li>
-                        <li><a class="text-muted" href="#">My orders</a></li>
-                    </ul>
-                </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-                <div class="col-12 col-sm-12 col-lg-3">
-                <!-- Links -->
-                    <h6 class="text-uppercase text-dark fw-bold mb-2">Newsletter</h6>
-                    <p class="text-muted">Stay in touch with latest updates about our products and offers</p>
-                    <div class="input-group mb-3">
-                        <input type="email" class="form-control border" placeholder="Email" aria-label="Email" aria-describedby="button-addon2" />
-                        <button class="btn btn-light border shadow-0" type="button" id="button-addon2" data-mdb-ripple-color="dark">
-                            Join
-                        </button>
-                    </div>
-                </div>
-            <!-- Grid column -->
             </div>
-        <!-- Grid row -->
         </div>
-    </section>
-<!-- Section: Links  -->
-
-<div class="">
-<div class="container">
-<div class="d-flex justify-content-between py-4 border-top">
-<!--- payment --->
-<div>
-<i class="fa-brands fa-cc-visa"></i>
-<i class="fa-brands fa-cc-amex"></i>
-<i class="fa-brands fa-cc-mastercard"></i>
-<i class="fa-brands fa-cc-paypal"></i>
-</div>
-<!--- payment --->
-
-<!--- language selector --->
-<div class="btn-group dropup">
-<button type="button" class="btn btn-primary dropdown-toggle" data-mdb-toggle="dropdown" aria-expanded="false">
-Dropup
-</button>
-<ul class="dropdown-menu">
-<li><a class="dropdown-item" href="#">Action</a></li>
-<li><a class="dropdown-item" href="#">Another action</a></li>
-<li><a class="dropdown-item" href="#">Something else here</a></li>
-<li><hr class="dropdown-divider" /></li>
-<li><a class="dropdown-item" href="#">Separated link</a></li>
-</ul>
-</div>
-<!--- language selector --->
-</div>
-</div>
-</div>
+    </div>
 </footer>
 <!-- Footer -->
 <script src="https://kit.fontawesome.com/e550ed1d52.js" crossorigin="anonymous"></script>

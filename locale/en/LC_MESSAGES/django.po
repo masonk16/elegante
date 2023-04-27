@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-18 21:04+0200\n"
+"POT-Creation-Date: 2023-04-26 23:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\cart\forms.py:9 .\templates\cart\cart-detail.html:40
+#: .\cart\forms.py:9 .\templates\shop\product-detail.html:112
 msgid "Quantity"
 msgstr ""
 
@@ -26,11 +26,11 @@ msgstr ""
 msgid "Coupon"
 msgstr ""
 
-#: .\elegante\settings.py:123
+#: .\elegante\settings.py:129
 msgid "English"
 msgstr ""
 
-#: .\elegante\settings.py:124
+#: .\elegante\settings.py:130
 msgid "Spanish"
 msgstr ""
 
@@ -39,18 +39,26 @@ msgid "admin/"
 msgstr ""
 
 #: .\elegante\urls.py:25
-msgid "cart/"
+msgid "account/"
 msgstr ""
 
 #: .\elegante\urls.py:26
-msgid "orders/"
+msgid "social-auth/"
 msgstr ""
 
 #: .\elegante\urls.py:27
-msgid "payment/"
+msgid "cart/"
 msgstr ""
 
 #: .\elegante\urls.py:28
+msgid "orders/"
+msgstr ""
+
+#: .\elegante\urls.py:29
+msgid "payment/"
+msgstr ""
+
+#: .\elegante\urls.py:30
 msgid "coupons/"
 msgstr ""
 
@@ -66,114 +74,248 @@ msgstr ""
 msgid "canceled/"
 msgstr ""
 
-#: .\templates\base.html:142
-msgid "Log In"
+#: .\templates\account\login.html:6 .\templates\account\login.html:14
+#: .\templates\account\login.html:32 .\templates\account\register.html:6
+#: .\templates\account\register.html:60 .\templates\base.html:48
+#: .\templates\registration\login.html:6 .\templates\registration\login.html:14
+msgid "Login"
 msgstr ""
 
-#: .\templates\base.html:150
-msgid "Cart"
+#: .\templates\account\login.html:20 .\templates\account\register.html:38
+#: .\templates\registration\login.html:20
+#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1810
+msgid "Email address"
 msgstr ""
 
-#: .\templates\base.html:169
-msgid "Please keep shopping with us"
+#: .\templates\account\login.html:26 .\templates\account\register.html:44
+#: .\templates\registration\login.html:26
+msgid "Password"
 msgstr ""
 
-#: .\templates\base.html:174
-msgid "Quick Links"
+#: .\templates\account\login.html:36 .\templates\account\register.html:14
+#: .\templates\account\register.html:56 .\templates\base.html:44
+#: .\templates\registration\login.html:34
+msgid "Register"
 msgstr ""
 
-#: .\templates\base.html:188 .\templates\base.html:192
-msgid "Subscribe"
+#: .\templates\account\login.html:40
+msgid "Register with Google"
 msgstr ""
 
-#: .\templates\base.html:218 .\templates\cart\cart-detail.html:7
-#: .\templates\cart\cart-detail.html:16 .\templates\orders\checkout.html:102
-msgid "Your Cart"
+#: .\templates\account\register.html:20
+msgid "Username"
 msgstr ""
 
-#: .\templates\base.html:258
-msgid "View Cart"
+#: .\templates\account\register.html:26
+msgid "First Name"
 msgstr ""
 
-#: .\templates\base.html:261 .\templates\cart\cart-detail.html:121
-#: .\templates\orders\checkout.html:6 .\templates\orders\checkout.html:20
-#: .\templates\orders\checkout.html:33
-msgid "Checkout"
+#: .\templates\account\register.html:32
+msgid "Last Name"
 msgstr ""
 
-#: .\templates\base.html:276
-msgid "Type your search here"
+#: .\templates\account\register.html:50
+msgid "Confirm Password"
 msgstr ""
 
-#: .\templates\cart\cart-detail.html:20
-msgid "Continue Shopping"
+#: .\templates\account\register.html:60
+msgid "Already have an account"
 msgstr ""
 
-#: .\templates\cart\cart-detail.html:34
-msgid "Product"
+#: .\templates\account\register.html:64
+msgid "Sign up with Google"
 msgstr ""
 
-#: .\templates\cart\cart-detail.html:37
-msgid "Price"
-msgstr ""
-
-#: .\templates\cart\cart-detail.html:43 .\templates\cart\cart-detail.html:105
-#: .\templates\orders\checkout.html:157
-msgid "Total"
-msgstr ""
-
-#: .\templates\cart\cart-detail.html:97 .\templates\orders\checkout.html:137
-msgid "Subtotal"
-msgstr ""
-
-#: .\templates\cart\cart-detail.html:99
-#, python-format
-msgid ""
-"\n"
-"                                <h5 class=\"media-title\">%(discount)s%% "
-"off</h5>\n"
-"                                <span class=\"small\">%(code)s</span>\n"
-"                            "
-msgstr ""
-
-#: .\templates\orders\checkout.html:18 .\templates\shop\product-detail.html:19
-#: .\templates\shop\product-listing.html:25
+#: .\templates\account\user-detail.html:16 .\templates\base.html:100
+#: .\templates\cart\cart-detail.html:18 .\templates\orders\checkout.html:16
+#: .\templates\payment\payment-process.html:16 .\templates\shop\index.html:5
+#: .\templates\shop\product-detail.html:17
+#: .\templates\shop\product-list.html:26
 msgid "Home"
 msgstr ""
 
-#: .\templates\orders\checkout.html:19 .\templates\shop\product-listing.html:30
+#: .\templates\account\user-detail.html:18
+msgid "User"
+msgstr ""
+
+#: .\templates\account\user-detail.html:44
+msgid "My orders"
+msgstr ""
+
+#: .\templates\account\user-detail.html:48
+#: .\venv\Lib\site-packages\django\forms\formsets.py:483
+#: .\venv\Lib\site-packages\django\forms\formsets.py:490
+msgid "Order"
+msgstr ""
+
+#: .\templates\account\user-detail.html:49
+msgid "Total Items"
+msgstr ""
+
+#: .\templates\account\user-detail.html:50
+msgid "Total Price"
+msgstr ""
+
+#: .\templates\account\user-detail.html:51
+msgid "Status"
+msgstr ""
+
+#: .\templates\account\user-detail.html:60
+msgid "Order No"
+msgstr ""
+
+#: .\templates\account\user-detail.html:73 .\templates\orders\pdf.html:99
+msgid "Paid"
+msgstr ""
+
+#: .\templates\account\user-detail.html:75
+msgid "Pending"
+msgstr ""
+
+#: .\templates\base.html:39
+msgid "Logout"
+msgstr ""
+
+#: .\templates\base.html:55
+msgid "Cart"
+msgstr ""
+
+#: .\templates\base.html:103 .\templates\cart\cart-detail.html:22
+#: .\templates\shop\product-detail.html:21
+#: .\templates\shop\product-list.html:30
 msgid "Shop"
 msgstr ""
 
-#: .\templates\orders\checkout.html:85
-msgid "Place order"
+#: .\templates\cart\cart-detail.html:7 .\templates\cart\cart-detail.html:26
+#: .\templates\cart\cart-detail.html:45
+msgid "Your Cart"
 msgstr ""
 
-#: .\templates\orders\checkout.html:130
-msgid "Order Summary"
+#: .\templates\cart\cart-detail.html:56 .\templates\shop\product-detail.html:87
+msgid "per unit"
 msgstr ""
 
-#: .\templates\orders\checkout.html:142
+#: .\templates\cart\cart-detail.html:87
+msgid "Free Delivery within 1-2 weeks"
+msgstr ""
+
+#: .\templates\cart\cart-detail.html:98
+msgid "Have a coupon"
+msgstr ""
+
+#: .\templates\cart\cart-detail.html:102
+msgid "Redeem"
+msgstr ""
+
+#: .\templates\cart\cart-detail.html:112 .\templates\orders\checkout.html:105
+msgid "Subtotal"
+msgstr ""
+
+#: .\templates\cart\cart-detail.html:115
 #, python-format
 msgid ""
 "\n"
-"                                                    \"%(code)s\"\n"
-"                                                    <span>%(discount)s%% "
-"off</span>\n"
-"                                                "
+"                                <div class=\"d-flex justify-content-between"
+"\">\n"
+"                                    <p class=\"mb-2\">%(code)s</p>\n"
+"                                    <p class=\"mb-2 \">%(discount)s%% off</"
+"p>\n"
+"                                </div>\n"
+"                            "
 msgstr ""
 
-#: .\templates\orders\checkout.html:148
+#: .\templates\cart\cart-detail.html:123 .\templates\orders\checkout.html:116
 msgid "Discount"
 msgstr ""
 
-#: .\templates\orders\order-created.html:6
-#: .\templates\orders\order-created.html:16
-msgid "Thank you"
+#: .\templates\cart\cart-detail.html:129 .\templates\orders\checkout.html:122
+msgid "Total"
 msgstr ""
 
-#: .\templates\orders\order-created.html:15
-msgid "ORDER CREATED"
+#: .\templates\cart\cart-detail.html:134 .\templates\orders\checkout.html:6
+#: .\templates\orders\checkout.html:39
+msgid "Checkout"
+msgstr ""
+
+#: .\templates\cart\cart-detail.html:135
+msgid "Continue Shopping"
+msgstr ""
+
+#: .\templates\cart\cart-detail.html:148
+msgid "Recommended items"
+msgstr ""
+
+#: .\templates\cart\cart-detail.html:169 .\templates\shop\index.html:38
+#: .\templates\shop\product-list.html:178
+msgid "View Product"
+msgstr ""
+
+#: .\templates\orders\checkout.html:18
+#: .\templates\payment\payment-process.html:18
+msgid "Shopping cart"
+msgstr ""
+
+#: .\templates\orders\checkout.html:20
+#: .\templates\payment\payment-process.html:20
+msgid "Order info"
+msgstr ""
+
+#: .\templates\orders\checkout.html:22
+#: .\templates\payment\payment-process.html:22
+msgid "Payment"
+msgstr ""
+
+#: .\templates\orders\checkout.html:44
+msgid "First name"
+msgstr ""
+
+#: .\templates\orders\checkout.html:51
+msgid "Last name"
+msgstr ""
+
+#: .\templates\orders\checkout.html:58
+msgid "Email"
+msgstr ""
+
+#: .\templates\orders\checkout.html:65
+msgid "Phone Number"
+msgstr ""
+
+#: .\templates\orders\checkout.html:72
+msgid "Address"
+msgstr ""
+
+#: .\templates\orders\checkout.html:79
+msgid "Postal code"
+msgstr ""
+
+#: .\templates\orders\checkout.html:86
+msgid "City"
+msgstr ""
+
+#: .\templates\orders\checkout.html:93
+msgid "Place order"
+msgstr ""
+
+#: .\templates\orders\checkout.html:103
+msgid "Summary"
+msgstr ""
+
+#: .\templates\orders\checkout.html:110
+#, python-format
+msgid ""
+"\n"
+"                        <p class=\"mb-2\">\"%(code)s\"</p>\n"
+"                        <p class=\"mb-2\">%(discount)s%% off</p>\n"
+"                    "
+msgstr ""
+
+#: .\templates\orders\checkout.html:127
+msgid "Items in cart"
+msgstr ""
+
+#: .\templates\orders\order-created.html:6
+msgid "Thank you!"
 msgstr ""
 
 #: .\templates\orders\pdf.html:7 .\templates\orders\pdf.html:45
@@ -222,10 +364,6 @@ msgid "GRAND TOTAL"
 msgstr ""
 
 #: .\templates\orders\pdf.html:99
-msgid "Paid"
-msgstr ""
-
-#: .\templates\orders\pdf.html:99
 msgid "Pending payment"
 msgstr ""
 
@@ -236,103 +374,158 @@ msgid ""
 msgstr ""
 
 #: .\templates\payment\payment-canceled.html:6
-#: .\templates\payment\payment-canceled.html:16
+#: .\templates\payment\payment-canceled.html:14
 msgid "Payment Canceled"
 msgstr ""
 
 #: .\templates\payment\payment-canceled.html:15
-msgid "CANCELED"
+msgid ""
+"Your payment was unsuccessful and we cannot process your order at this time."
 msgstr ""
 
-#: .\templates\payment\payment-canceled.html:22
-msgid "Your payment has not been processed."
+#: .\templates\payment\payment-canceled.html:16
+msgid "Check with your payment service provider and try again"
+msgstr ""
+
+#: .\templates\payment\payment-canceled.html:18
+#: .\templates\payment\payment-done.html:18
+msgid "Back to Shop"
 msgstr ""
 
 #: .\templates\payment\payment-done.html:6
+#: .\templates\payment\payment-done.html:14
 msgid "Payment Successful"
 msgstr ""
 
 #: .\templates\payment\payment-done.html:15
-msgid "SUCCESS"
+msgid "Your payment was successful and your order is being processed."
 msgstr ""
 
 #: .\templates\payment\payment-done.html:16
-msgid "Payment Successful!"
-msgstr ""
-
-#: .\templates\payment\payment-done.html:22
-msgid ""
-"Your payment has been processed successfully. Thank you for shopping with us"
+msgid "Thank you for shopping with us"
 msgstr ""
 
 #: .\templates\payment\payment-process.html:6
 msgid "Pay by credit card"
 msgstr ""
 
-#: .\templates\payment\payment-process.html:17
+#: .\templates\payment\payment-process.html:37
+msgid "Pay by Credit Card"
+msgstr ""
+
+#: .\templates\payment\payment-process.html:43
 msgid "Card Number"
 msgstr ""
 
-#: .\templates\payment\payment-process.html:25
+#: .\templates\payment\payment-process.html:57
 msgid "Expiration Date"
 msgstr ""
 
-#: .\templates\payment\payment-process.html:29
+#: .\templates\payment\payment-process.html:63
 msgid "Pay"
 msgstr ""
 
-#: .\templates\shop\home.html:57
-msgid "Featured Products"
+#: .\templates\registration\logged_out.html:6
+msgid "Logged out"
 msgstr ""
 
-#: .\templates\shop\home.html:62
-msgid "New Arrivals"
+#: .\templates\registration\login.html:30
+msgid "Sign in"
 msgstr ""
 
-#: .\templates\shop\home.html:94 .\templates\shop\product-detail.html:109
-#: .\templates\shop\product-listing.html:170
+#: .\templates\registration\login.html:34
+msgid "Not a member"
+msgstr ""
+
+#: .\templates\registration\login.html:38
+msgid "Login with Google"
+msgstr ""
+
+#: .\templates\shop\index.html:11
+msgid "Get the best"
+msgstr ""
+
+#: .\templates\shop\index.html:13
+msgid ""
+"All your high-end gadgets in one place. Shop with us for a wholesome and "
+"convenient experience. Take advantage of our coupons as well"
+msgstr ""
+
+#: .\templates\shop\index.html:15
+msgid "Go to shop"
+msgstr ""
+
+#: .\templates\shop\index.html:26
+msgid "New products"
+msgstr ""
+
+#: .\templates\shop\index.html:55
+msgid "Why choose us"
+msgstr ""
+
+#: .\templates\shop\index.html:65
+msgid "Reasonable prices"
+msgstr ""
+
+#: .\templates\shop\index.html:78
+msgid "Best quality"
+msgstr ""
+
+#: .\templates\shop\index.html:91
+msgid "Worldwide shipping"
+msgstr ""
+
+#: .\templates\shop\index.html:104
+msgid "Customer satisfaction"
+msgstr ""
+
+#: .\templates\shop\index.html:117
+msgid "Happy customers"
+msgstr ""
+
+#: .\templates\shop\index.html:130
+msgid "Thousand items"
+msgstr ""
+
+#: .\templates\shop\pagination.html:9
+msgid "Previous"
+msgstr ""
+
+#: .\templates\shop\pagination.html:17
+msgid "Next"
+msgstr ""
+
+#: .\templates\shop\product-detail.html:95
+msgid "Category"
+msgstr ""
+
+#: .\templates\shop\product-detail.html:101
+msgid "Brand"
+msgstr ""
+
+#: .\templates\shop\product-detail.html:117
 msgid "Add to cart"
 msgstr ""
 
-#: .\templates\shop\home.html:183
-msgid "Blog Posts & News"
+#: .\templates\shop\product-detail.html:134
+msgid "Specification"
 msgstr ""
 
-#: .\templates\shop\product-listing.html:10
-#: .\templates\shop\product-listing.html:58
+#: .\templates\shop\product-detail.html:154
+msgid "Similar items"
+msgstr ""
+
+#: .\templates\shop\product-list.html:9 .\templates\shop\product-list.html:20
+#: .\templates\shop\product-list.html:151
 msgid "Products"
 msgstr ""
 
-#: .\templates\shop\product-listing.html:64
-msgid "Sort"
-msgstr ""
-
-#: .\templates\shop\product-listing.html:69
-msgid "Price: high to low"
-msgstr ""
-
-#: .\templates\shop\product-listing.html:72
-msgid "Price: low to high"
-msgstr ""
-
-#: .\templates\shop\product-listing.html:88
-msgid "Filter by Category"
-msgstr ""
-
-#: .\templates\shop\product-listing.html:91
+#: .\templates\shop\product-list.html:78
 msgid "Categories"
 msgstr ""
 
-#: .\templates\shop\product-listing.html:106
-msgid "Filter by Size"
-msgstr ""
-
-#: .\templates\shop\product-listing.html:109
-msgid "Size"
-msgstr ""
-
-#: .\templates\shop\product-listing.html:137
-msgid "Filter by Price"
+#: .\templates\shop\product-list.html:101
+msgid "Ratings"
 msgstr ""
 
 #: .\venv\Lib\site-packages\click\_termui_impl.py:496
@@ -906,10 +1099,6 @@ msgstr ""
 msgid "Duration"
 msgstr ""
 
-#: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1810
-msgid "Email address"
-msgstr ""
-
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1835
 msgid "File path"
 msgstr ""
@@ -1180,11 +1369,6 @@ msgid "Please submit at least %(num)d form."
 msgid_plural "Please submit at least %(num)d forms."
 msgstr[0] ""
 msgstr[1] ""
-
-#: .\venv\Lib\site-packages\django\forms\formsets.py:483
-#: .\venv\Lib\site-packages\django\forms\formsets.py:490
-msgid "Order"
-msgstr ""
 
 #: .\venv\Lib\site-packages\django\forms\formsets.py:496
 msgid "Delete"

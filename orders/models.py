@@ -4,9 +4,11 @@ from decimal import Decimal
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.utils.translation import gettext_lazy as _
 from coupons.models import Coupon
+from django.contrib.auth.models import User
 
 
 class Order(models.Model):
+    customer = models.ForeignKey(User, related_name="orders", null=True, on_delete=models.CASCADE)
     first_name = models.CharField(_('first name'), max_length=50)
     last_name = models.CharField(_('last name'), max_length=50)
     email = models.EmailField(_('e-mail'))
@@ -17,6 +19,8 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     paid = models.BooleanField(default=False)
+    total_items = models.IntegerField(null=True)
+    total_price = models.CharField(max_length=10, null=True)
     braintree_id = models.CharField(max_length=150, blank=True)
     coupon = models.ForeignKey(Coupon,
                                related_name='orders',

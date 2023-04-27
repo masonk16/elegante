@@ -23,7 +23,7 @@
                     </a>
                     <span class="text-white-50 mx-2"> > </span>
                     <a href="{% url 'cart:cart_detail' %}" class="text-white-50">
-                        Your Cart
+                        {% trans 'Your Cart' %}
                     </a>
                 </h6>
             </nav>
@@ -42,18 +42,18 @@
             <div class="col-lg-9">
                 <div class="card border shadow-0">
                     <div class="m-4">
-                        <h4 class="card-title mb-4">{% trans 'Your shopping cart' %}</h4>
+                        <h4 class="card-title mb-4">{% trans 'Your Cart' %}</h4>
                         {% for item in cart %}
                             {% with product=item.product %}
                                 <div class="row gy-3 mb-4">
                                     <div class="col-lg-5">
                                         <div class="me-lg-5">
                                             <div class="d-flex">
-                                                <img src="" class="border rounded me-3" style="width: 96px; height: 96px;" />
+                                                <img src="{{ product.product_images.first }}" class="border rounded me-3" style="width: 96px; height: 96px;" />
                                                 <div class="">
                                                     <a href="{{ product.get_absolute_url }}" class="nav-link">{{ product.name }}</a>
                                                     <div class="">
-                                            <h6 class="h6">${{ product.price }} / per unit</h6> <br />
+                                            <h6 class="h6">${{ product.price }} / {% trans 'per unit' %}</h6> <br />
                                         </div>
                                                 </div>
                                             </div>
@@ -84,7 +84,7 @@
                     </div>
 
                     <div class="border-top pt-4 mx-4 mb-4">
-                        <p><i class="fas fa-truck text-muted fa-lg"></i> Free Delivery within 1-2 weeks</p>
+                        <p><i class="fas fa-truck text-muted fa-lg"></i>{% trans 'Free Delivery within 1-2 weeks' %}</p>
                     </div>
                 </div>
             </div>
@@ -95,11 +95,11 @@
                     <div class="card-body">
                         <form action="{% url "coupons:apply" %}" method="post">
                             <div class="form-group">
-                                <label class="form-label">Have a coupon?</label>
+                                <label class="form-label">{% trans 'Have a coupon' %}?</label>
                                 <div class="input-group">
                                     {% csrf_token %}
                                     {{ coupon_apply_form.code }}
-                                    <button type="submit" class="btn btn-light border">Redeem</button>
+                                    <button type="submit" class="btn btn-light border">{% trans 'Redeem' %}</button>
                                 </div>
                             </div>
                         </form>
@@ -166,7 +166,7 @@
                                 <strong class="">${{ p.price }}</strong>
                             </div>
                             <div class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
-                                <a href="{{ product.get_absolute_url }}" class="btn btn-outline-primary w-100">View Product</a>
+                                <a href="{{ product.get_absolute_url }}" class="btn btn-outline-primary w-100">{% trans 'View Product' %}</a>
                             </div>
                         </div>
                     </div>
