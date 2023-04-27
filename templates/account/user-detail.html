@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block title %}
+{{ user.get_full_name }}
+{% endblock %}
+
+{% block jumbotron %}
+<!-- Heading -->
+<div class="bg-primary">
+    <div class="container py-4">
+    <!-- Breadcrumb -->
+        <nav class="d-flex">
+            <h6 class="mb-0">
+                <a href="{% url 'shop:home' %}" class="text-white-50">{%  trans 'Home' %}</a>
+                <span class="text-white-50 mx-2"> > </span>
+                <a href="" class="text-white-50">2. {% trans 'User' %}</a>
+                <span class="text-white-50 mx-2"> > </span>
+                <a href="{% url "account:user_detail" user.username %}" class="text-white"><u>{{ user.get_full_name }}</u></a>
+            </h6>
+        </nav>
+    <!-- Breadcrumb -->
+    </div>
+</div>
+<!-- Heading -->
+{% endblock %}
+
+{% block content %}
+<section style="background-color: #eee;">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <img src="https://i.imgur.com/LRzZvH5.png" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;">
+                        <h5 class="my-3">{{ user.get_full_name }}</h5>
+                        <p class="text-muted mb-1">{{ user.email }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="row">
+                 <h3 class="mb-3">{% trans 'My orders' %}</h3>
+                    <table class="table align-middle mb-0 bg-white">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>{% trans 'Order' %}</th>
+                                <th>{% trans 'Total Items' %}</th>
+                                <th>{% trans 'Total Price' %}</th>
+                                <th>{% trans 'Status' %}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for order in user.orders.all  %}
+                            <tr>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="ms-3">
+                                            <p class="fw-bold mb-1">{% trans 'Order No' %}. {{ order.id }}</p>
+                                            <p class="text-muted mb-0">{{ order.created|date:"D, d F Y" }}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                <p class="fw-normal mb-1">{{ order.total_items }}</p>
+                                </td>
+                                <td>
+                                    ${{ order.get_total_cost|floatformat:2 }}
+                                </td>
+                                <td>
+                                    {% if order.paid %}
+                                        <span class="text-success">{% trans 'Paid' %}</span>
+                                    {% else %}
+                                        <span class="text-danger">{% trans 'Pending' %}</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

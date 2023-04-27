@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block title %}
+{% trans 'Login' %}
+{% endblock %}
+
+{% block content %}
+    <section class="jumbotron text-center">
+        <div class="container d-flex justify-content-center">
+            <div class="card col-lg-5 auto">
+                <div class="card-body">
+                    <h5 class="card-title">{% trans 'Register' %}</h5>
+                    <form action="{% url 'account:register' %}" method="post">
+                        {% csrf_token %}
+                        <!-- Username input -->
+                        <div class="form-outline mb-4">
+                            {{ user_form.username|add_class:"form-control" }}
+                            <label class="form-label">{% trans 'Username' %}</label>
+                        </div>
+
+                        <!-- First Name input -->
+                        <div class="form-outline mb-4">
+                            {{ user_form.first_name|add_class:"form-control" }}
+                            <label class="form-label">{% trans 'First Name' %}</label>
+                        </div>
+
+                        <!-- Last Name input -->
+                        <div class="form-outline mb-4">
+                            {{ user_form.last_name|add_class:"form-control" }}
+                            <label class="form-label">{% trans 'Last Name' %}</label>
+                        </div>
+
+                        <!-- Email input -->
+                        <div class="form-outline mb-4">
+                            {{ user_form.email|add_class:"form-control" }}
+                            <label class="form-label" for="form2Example1">{% trans 'Email address' %}</label>
+                        </div>
+
+                        <!-- Password input -->
+                        <div class="form-outline mb-4">
+                            {{ user_form.password|add_class:"form-control" }}
+                            <label class="form-label">{% trans 'Password' %}</label>
+                        </div>
+
+                        <!-- Password2 input -->
+                        <div class="form-outline mb-4">
+                            {{ user_form.password2|add_class:"form-control" }}
+                            <label class="form-label">{% trans 'Confirm Password' %}</label>
+                        </div>
+
+                        <!-- 2 column grid layout for inline styling -->
+                        <input type="hidden" name="next" value="{{ next }}" />
+                        <!-- Submit button -->
+                        <button type="submit" class="btn btn-primary btn-block mb-4">{% trans 'Register' %}</button>
+                    </form>
+                     <!-- Register buttons -->
+                    <div class="text-center">
+                        <p>{% trans 'Already have an account' %}? <a href="{% url 'account:login' %}">{% trans 'Login' %}</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

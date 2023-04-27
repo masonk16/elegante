@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block title %}
+{% trans 'Login' %}
+{% endblock %}
+
+{% block content %}
+    <section class="jumbotron text-center">
+        <div class="container d-flex justify-content-center">
+            <div class="card col-lg-5 auto">
+                <div class="card-body">
+                    <h5 class="card-title">{% trans 'Login' %}</h5>
+                    <form action="{% url 'account:login' %}" method="post">
+                        {% csrf_token %}
+                        <!-- Email input -->
+                        <div class="form-outline mb-4">
+                            {{ form.username|add_class:"form-control" }}
+                            <label class="form-label" for="form2Example1">{% trans 'Email address' %}</label>
+                        </div>
+
+                        <!-- Password input -->
+                        <div class="form-outline mb-4">
+                            {{ form.password|add_class:"form-control" }}
+                            <label class="form-label" for="form2Example2">{% trans 'Password' %}</label>
+                        </div>
+
+                        <!-- 2 column grid layout for inline styling -->
+                        <input type="hidden" name="next" value="{{ next }}" />
+                        <!-- Submit button -->
+                        <button type="submit" class="btn btn-primary btn-block mb-4">{% trans 'Login' %}</button>
+                    </form>
+                     <!-- Register buttons -->
+                    <div class="text-center">
+                        <p>Not a member? <a href="{% url 'account:register' %}">{% trans 'Register' %}</a></p>
+                        <p>OR</p>
+                        <button type="button" class="btn btn-primary btn-block mb-4">
+                            <i class="fab fa-google"></i>
+                            {% trans 'Register with Google' %}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

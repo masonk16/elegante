@@ -33,7 +33,7 @@ def product_list(request, category_slug=None):
     except EmptyPage:
         # If page is out of range deliver last page of results
         products = paginator.page(paginator.num_pages)
-    return render(request, "shop/catalog.html",
+    return render(request, "shop/product-list.html",
                   {"category": category, "categories": categories,
                    "products": products, "page": page},
                   )
