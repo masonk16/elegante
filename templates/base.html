@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
-{#    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">#}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 {#    <link rel="stylesheet" href="{% static 'elegante/css/style.css' %}">#}
 {#    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">#}
     <!-- Font Awesome -->
@@ -29,134 +29,195 @@
 <body>
 <!--Main Navigation-->
 <header class="justify-content-center">
-  <!-- Jumbotron -->
-    <div class="p-3 text-center bg-white border-bottom">
-        <div class="container">
-            <div class="row gy-3">
-            <!-- Left elements -->
-                <div class="col-lg-2 col-sm-4 col-4">
-                    <a href="{% url 'shop:home' %}" class="float-start">
-                        <img src="https://i.imgur.com/Rg4U9sV.png" height="50" />
-                    </a>
-                </div>
-            <!-- Left elements -->
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg sticky-top navbar-light bg-light">
+<!-- Container wrapper -->
+    <div class="container">
+    <!-- Navbar brand -->
+        <a class="navbar-brand me-2" href="{% url 'shop:home' %}">
+            <img src="https://i.imgur.com/Rg4U9sV.png" height="20" alt="Logo" loading="lazy" style="margin-top: -1px;" />
+        </a>
 
-            <!-- Center elements -->
-                <div class="order-lg-last col-lg-5 col-sm-8 col-8">
-                    <div class="d-flex float-end">
-                        {% if request.user.is_authenticated %}
-                            <a href="{% url 'account:user_detail' username=request.user.username %}" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
-                                <i class="fa-solid fa-user-alt m-1 me-md-2"></i>
-                                <p class="d-none d-md-block mb-0">{{ request.user.first_name }}</p>
-                            </a>
-                            <a href="{% url 'account:logout' %}" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
-                                <i class="fa-solid fa-heart m-1 me-md-2"></i>
-                                <p class="d-none d-md-block mb-0">{% trans 'Logout' %}</p>
-                            </a>
-                        {% else %}
-                            <a href="{% url 'account:register' %}" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
-                                <i class="fa-solid fa-user-alt m-1 me-md-2"></i>
-                                <p class="d-none d-md-block mb-0">{% trans 'Register' %}</p>
-                            </a>
-                             <a href="{% url 'account:login' %}" class="me-1 border rounded py-1 px-3 nav-link d-flex align-items-center">
-                                <i class="fa-solid fa-user-alt m-1 me-md-2"></i>
-                                <p class="d-none d-md-block mb-0">{% trans 'Login' %}</p>
-                             </a>
-                        {% endif %}
-
-                        <a href="{% url 'cart:cart_detail' %}" class="border rounded py-1 px-3 nav-link d-flex align-items-center">
-                            <i class="fa-solid fa-shopping-cart m-1 me-md-2"></i>
-                            <p class="d-none d-md-block mb-0">
-                                {% trans 'Cart' %}
-                                {% with total_items=cart|length %}
-                                    ({{ total_items }})
-                                {% endwith %}
-                            </p>
-                        </a>
-                        <!--- language selector --->
-                {% get_current_language as LANGUAGE_CODE %}
-                {% get_available_languages as LANGUAGES %}
-                {% get_language_info_list for LANGUAGES as languages %}
-                <div>
-                    {% for language in languages %}
-                        <a class="btn {% if language.code == LANGUAGE_CODE %} btn-primary {% else %} btn-tertiary {% endif %}" href="/{{ language.code }}/" role="button">
-                            {{ language.code|upper }}
-                        </a>
-                    {% endfor %}
-                </div><!--- language selector --->
-                    </div>
-                </div>
-            <!-- Center elements -->
-
-            <!-- Right elements -->
-                <div class="col-lg-5 col-md-12 col-12">
-
-                </div>
-            <!-- Right elements -->
-            </div>
-        </div>
-    </div>
-  <!-- Jumbotron -->
-
-  <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white">
-    <!-- Container wrapper -->
-        <div class="container justify-content-center justify-content-md-between">
         <!-- Toggle button -->
-        <button class="navbar-toggler border py-2 text-dark" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarLeftAlignExample" aria-controls="navbarLeftAlignExample" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarButtonsExample" aria-controls="navbarButtonsExample" aria-expanded="false" aria-label="Toggle navigation">
             <i class="fas fa-bars"></i>
         </button>
 
         <!-- Collapsible wrapper -->
-            <div class="collapse navbar-collapse justify-content-center" id="navbarLeftAlignExample">
+        <div class="collapse navbar-collapse" id="navbarButtonsExample">
             <!-- Left links -->
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" aria-current="page" href="{% url 'shop:home' %}">{% trans 'Home' %}</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" href="{% url 'shop:product_list' %}">{% trans 'Shop' %}</a>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" aria-current="page" href="{% url 'shop:home' %}">
+                        <span><i class="fas fa-home fa-lg"></i></span>
+                        {% trans 'Home' %}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="{% url 'shop:product_list' %}">
+                        <span><i class="fas fa-list fa-lg"></i></span>
+                        {% trans 'Shop' %}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="{% url 'shop:product_search' %}">
+                        <span><i class="fas fa-search fa-lg"></i></span>
+                        {% trans 'Search' %}
+                    </a>
+                </li>
+            </ul>
+            <!-- Left links -->
+            <div class="d-flex align-items-center">
+                {% if request.user.is_authenticated %}
+                    <ul class="navbar-nav flex-row">
+                        <!-- Avatar -->
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                            <img src="https://i.imgur.com/LRzZvH5.png" class="rounded-circle" height="22" alt="Avatar" loading="lazy"/>
+                                <strong>{{ request.user.first_name }}</strong>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'account:user_detail' username=request.user.username %}">
+                                        {% trans 'Account' %}
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item" href="{% url 'account:logout' %}">
+                                        {% trans 'Logout' %}
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                    </ul>
+                {% else %}
+                    <a href="{% url 'account:login' %}" class="btn btn-link px-3 me-2">
+                        {% trans 'Login' %}
+                    </a>
+                    <a href="{% url 'account:register' %}" class="btn btn-primary me-3">
+                        {% trans 'Register' %}
+                    </a>
+                {% endif %}
+                <a class="nav-link" href="{% url 'cart:cart_detail' %}">
+                    <i class="fas fa-shopping-cart fa-lg"></i>
+                    {% with total_items=cart|length %}
+                        <span class="badge rounded-pill badge-notification bg-danger">
+                            {{ total_items }}
+                        </span>
+                    {% endwith %}
+                </a>
+                <ul class="navbar-nav">
+
+                    <!--- language selector --->
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    <!-- Icon dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                            <i class="{% if LANGUAGE_CODE == "en" %}flag-united-kingdom {% else %}flag-spain {% endif %}flag"></i>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" href="#">
+                                    <i class="{% if LANGUAGE_CODE == "en" %}flag-united-kingdom {% else %}flag-spain {% endif %}flag"></i>
+                                    {{ LANGUAGE_CODE|upper }}
+                                    <i class="fa fa-check text-success ms-2"></i>
+                                </a>
+                            </li>
+                        <li><hr class="dropdown-divider" /></li>
+                        {% for language in languages %}
+                            {% if language.code != LANGUAGE_CODE %}
+                                <li>
+                                    <a class="dropdown-item" href="/{{ language.code }}/">
+                                        <i class="{% if language.code == "en" %}flag-united-kingdom {% else %}flag-spain {% endif %}flag"></i>
+                                        {{ language.name|title }}
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                        </ul>
                     </li>
                 </ul>
-            <!-- Left links -->
             </div>
         </div>
-    <!-- Container wrapper -->
-    </nav>
-  <!-- Navbar -->
+    <!-- Collapsible wrapper -->
+    </div>
+<!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
   <!-- Jumbotron -->
     {% block jumbotron %}
 
     {% endblock %}
   <!-- Jumbotron -->
 </header>
-
+{#{% if messages %}#}
+{#    {% for message in messages %}#}
+{#        <div class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">#}
+{#            <div class="d-flex">#}
+{#                <div class="toast-body">#}
+{#                    {{ message|safe }}#}
+{#                </div>#}
+{#                <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>#}
+{#            </div>#}
+{#        </div>#}
+{#    {% endfor %}#}
+{#{% endif %}#}
 {% block content %}
 
 
 {% endblock %}
 <!-- Footer -->
-<footer class="text-center text-lg-start text-muted mt-3" style="background-color: #f5f5f5;">
-    <div class="">
-        <div class="container">
-            <div class="d-flex justify-content-between py-4 border-top">
-                <!--- payment --->
-                <div>
-                    <i class="fa-brands fa-cc-visa"></i>
-                    <i class="fa-brands fa-cc-amex"></i>
-                    <i class="fa-brands fa-cc-mastercard"></i>
-                    <i class="fa-brands fa-cc-paypal"></i>
+<footer class="bg-light text-center">
+  <!-- Grid container -->
+    <div class="container p-4 pb-0">
+        <!-- Section: Form -->
+        <section class="">
+            <form action="">
+                <!--Grid row-->
+                <div class="row d-flex justify-content-center">
+                    <!--Grid column-->
+                    <div class="col-auto">
+                        <p class="pt-2">
+                            <strong>Sign up for our newsletter</strong>
+                        </p>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-md-5 col-12">
+                        <!-- Email input -->
+                        <div class="form-outline mb-4">
+                            <input type="email" id="form5Example27" class="form-control" />
+                            <label class="form-label" for="form5Example27">Email address</label>
+                        </div>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-auto">
+                        <!-- Submit button -->
+                        <button type="submit" class="btn btn-primary mb-4">
+                            Subscribe
+                        </button>
+                    </div>
+                    <!--Grid column-->
                 </div>
-                <!--- payment --->
-                <div>
-                <!-- Content -->
-                    <p class="mt-2 text-dark">
-                        © 2023 Copyright: Elegante
-                    </p>
-                </div>
-            </div>
-        </div>
+                <!--Grid row-->
+            </form>
+        </section>
+        <!-- Section: Form -->
     </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2023 Copyright:
+        <a class="text-dark" href="#">Elegante</a>
+    </div>
+    <!-- Copyright -->
 </footer>
 <!-- MDB -->
 <script
@@ -165,5 +226,7 @@
 ></script>
 <!-- Footer -->
 <script src="https://kit.fontawesome.com/e550ed1d52.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
 </body>
 </html>

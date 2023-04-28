@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block title %}
     {{ product.name }}
@@ -111,10 +112,9 @@
                 {% csrf_token %}
                     <label class="mb-2 d-block">{% trans 'Quantity' %}</label>
                 <div class="form-group col-md-2">
-
-                    {{ cart_product_form.quantity }}
+                    {{ cart_product_form.quantity|add_class:"form-control"|attr:"type:number"|attr:"min=1"|attr:"max=20"|attr:"value=1" }}
                 </div>
-                <button href="#" class="btn btn-primary shadow-0 col-md-3"> <i class="me-1 fa fa-shopping-basket"></i> {% trans 'Add to cart' %}</button>
+                <button href="#" class="btn btn-primary shadow-0 col-md-3" id="liveToastBtn" > <i class="me-1 fa fa-shopping-basket"></i> {% trans 'Add to cart' %}</button>
 
                 </form>
                 </div>
@@ -175,6 +175,30 @@
         </div>
     </div>
 </section>
+{% if messages %}
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img src="..." class="rounded me-2" alt="...">
+                <strong class="me-auto">Cart updated</strong>
+                <small>just now</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+        <div class="toast-body">
+        {{ message|safe }}
+        </div>
+        </div>
+    </div>
+{% endif %}
+<script>
+const toastTrigger = document.getElementById('liveToastBtn')
+const toastLiveExample = document.getElementById('liveToast')
 
-
+if (toastTrigger) {
+  const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+  toastTrigger.addEventListener('click', () => {
+    toastBootstrap.show()
+  })
+}
+</script>
 {% endblock %}

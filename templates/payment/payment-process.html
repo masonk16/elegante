@@ -39,22 +39,23 @@
                     {% csrf_token %}
                         <!-- Email input -->
                         <div class="form-outline mb-4 form-group">
-                            <div id="card-number" class="field form-control" style="height: 35px;"></div>
-                            <label class="form-label" for="card-number">{% trans 'Card Number' %}</label>
+                            <div id="card-number" class="field form-control form-outline" style="height: 35px;"></div>
+                            <label for="card-number">{% trans 'Card Number' %}</label>
                         </div>
 
                         <!-- 2 column grid layout with text inputs for the first and last names -->
                         <div class="row mb-4">
                             <div class="col">
                                 <div class="form-outline form-group">
-                                    <div id="cvv" class="field form-control" style="height: 35px;"></div>
-                                    <label class="form-label" for="cvv">CVV</label>
+                                    <div id="cvv" class="field form-control form-outline" style="height: 35px;"></div>
+                                    <label for="cvv">CVV</label>
                                 </div>
                             </div>
                             <div class="col">
+
                                 <div class="form-outline form-group">
-                                    <div id="expiration-date" class="field form-control" style="height: 35px;"></div>
-                                    <label class="form-label" for="form3Example2">{% trans 'Expiration Date' %}</label>
+                                    <div id="expiration-date" class="field form-control form-outline" style="height: 35px;"></div>
+                                    <label for="expiration-date">{% trans 'Expiration Date' %}</label>
                                 </div>
                             </div>
                         </div>
@@ -90,9 +91,9 @@
                 'input.valid': {'color': 'green'}
             },
             fields: {
-                number: {selector: '#card-number'},
-                cvv: {selector: '#cvv'},
-                expirationDate: {selector: '#expiration-date'}
+                number: {selector: '#card-number', placeholder: '1111 1111 1111 1111'},
+                cvv: {selector: '#cvv', placeholder: '111'},
+                expirationDate: {selector: '#expiration-date', placeholder: 'MM / YY'}
             }
         }, function (hostedFieldsErr, hostedFieldsInstance) {
             if (hostedFieldsErr) {

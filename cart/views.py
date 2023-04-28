@@ -18,7 +18,9 @@ def cart_add(request, product_id):
         cart.add(
             product=product, quantity=cd["quantity"], override_quantity=cd["override"]
         )
-    return redirect("cart:cart_detail")
+        messages.success(request, f'{product.translations.name} added to cart!')
+
+    return redirect(product.get_absolute_url())
 
 
 @require_POST
@@ -45,3 +47,9 @@ def cart_detail(request):
             cart_products, max_results=4)
         context["recommended_products"] = recommended_products
     return render(request, "cart/cart-detail.html", context)
+
+
+def cart_clear(request):
+    cart = Cart(request)
+    cart.clear()
+    return redirect("cart:cart_detail")
