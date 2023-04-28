@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Category, Product
 from cart.forms import CartAddProductForm
+from .forms import SearchForm
 from .recommender import Recommender
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 
 
 def home(request):
@@ -55,3 +57,28 @@ def product_detail(request, id, slug):
         {"product": product,
          "cart_product_form": cart_product_form,
          "recommended_products": recommended_products})
+
+
+def product_search(request):
+    language = request.LANGUAGE_CODE
+    form = SearchForm()
+    query = None
+    results = []
+    if 'query' in request.GET:
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            search_vector = SearchVector(
+                'translations__name', 'specification',
+                'brand', 'category')
+            search_query = SearchQuery(query)
+            results = Product.objects.annotate(
+                search=search_vector,
+                rank=SearchRank(search_vector, search_query)
+            ).filter(
+                search=search_query, available=True,
+                translations__language_code=language
+            ).order_by('-rank').distinct()
+    return render(request, 'shop/search.html',
+                  {'form': form, 'query': query,
+                   'results': results})

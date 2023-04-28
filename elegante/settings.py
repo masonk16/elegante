@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "parler",
     "social_django",
     "django_extensions",
+    "django.contrib.postgres",
 ]
 
 MIDDLEWARE = [

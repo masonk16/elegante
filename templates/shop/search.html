@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% load widget_tweaks %}
+
+{% block title %}
+    {% trans 'Search' %}
+{% endblock %}
+
+{% block content %}
+<main class="my-5">
+    <div class="container">
+        <!--Section: Content-->
+        <section>
+            <!-- Jumbotron -->
+            <div id="intro" class="p-5 text-center bg-light shadow-5 rounded-5 mb-5">
+                <h1 class="mb-3 h2">{% trans 'What are you looking for today' %}?</h1>
+                <form>
+                    <div class="form-outline">
+                        {{ form.query|add_class:"form-control" }}
+                    </div>
+                    <button class="btn btn-primary m-2" type="submit">
+                        {% trans 'Search' %}
+                    </button>
+                </form>
+            </div>
+            <!-- Jumbotron -->
+        </section>
+        <!--Section: Content-->
+        {% if query %}
+            <!--Section: Content-->
+            <section class="text-center">
+                {% with results.count as total_results %}
+                    <h4 class="mb-5"><strong>{% trans 'Products containing' %} "{{ query }}" </strong><span class="badge badge-primary"> {{ total_results }}</span></h4>
+                {% endwith %}
+                <div class="row">
+                    {% for product in results %}
+                        <div class="col-lg-4 col-md-12 mb-4">
+                            <div class="card">
+                                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                                    <img src="{{ product.product_images.first }}" class="img-fluid" height="300px" />
+                                    <a href="{{ product.get_absolute_url }}">
+                                        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                                    </a>
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ product.name }}</h5>
+                                    <p class="card-text">
+                                        ${{ product.price }}
+                                    </p>
+                                    <a href="{{ product.get_absolute_url }}" class="btn btn-primary">{% trans 'View Product' %}</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <h3 class="mb-5"><strong>{% trans 'No products found' %}</strong></h3>
+                    {% endfor %}
+                </div>
+            </section>
+            <!--Section: Content-->
+        {% endif %}
+    </div>
+</main>
+<!--Main layout-->
+{% endblock %}
